@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在布局中使用&amp;lt;android.support.v7.widget.Toolbar&amp;gt;引进一个Toolbar，并推荐使用&amp;lt;android.support.design.widget.AppBarLayout&amp;gt;包裹它  &amp;lt;android.support.design.widget.AppBarLayout     android:layout_width=&amp;quot;ma">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Toolbar">
+<meta property="og:url" content="http://yoursite.com/2017/02/07/Toolbar/index.html">
+<meta property="og:site_name" content="XF-zhjnc.github.io">
+<meta property="og:description" content="在布局中使用&amp;lt;android.support.v7.widget.Toolbar&amp;gt;引进一个Toolbar，并推荐使用&amp;lt;android.support.design.widget.AppBarLayout&amp;gt;包裹它  &amp;lt;android.support.design.widget.AppBarLayout     android:layout_width=&amp;quot;ma">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-07-27T13:42:06.411Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Toolbar">
+<meta name="twitter:description" content="在布局中使用&amp;lt;android.support.v7.widget.Toolbar&amp;gt;引进一个Toolbar，并推荐使用&amp;lt;android.support.design.widget.AppBarLayout&amp;gt;包裹它  &amp;lt;android.support.design.widget.AppBarLayout     android:layout_width=&amp;quot;ma">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/07/Toolbar/"/>
+
+
+
+
+
+  <title>Toolbar | XF-zhjnc.github.io</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XF-zhjnc.github.io</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/07/Toolbar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MO Lulu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XF-zhjnc.github.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Toolbar</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-07T18:51:48+08:00">
+                2017-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li><p>在布局中使用<code>&lt;android.support.v7.widget.Toolbar&gt;</code>引进一个Toolbar，并推荐使用<code>&lt;android.support.design.widget.AppBarLayout&gt;</code>包裹它</p>
+<pre><code> &lt;android.support.design.widget.AppBarLayout
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;&gt;
+    &lt;android.support.v7.widget.Toolbar
+        xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+        android:id=&quot;@+id/toolbar&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:background=&quot;@color/colorPrimary&quot;&gt;
+    &lt;/android.support.v7.widget.Toolbar&gt;
+&lt;/android.support.design.widget.AppBarLayout&gt;
+</code></pre></li>
+</ol>
+<a id="more"></a>
+<ol>
+<li><p>在style.xml以及v21/style.xml中设置Application的theme: (继承AppCompatActivity,会默认显示Action bar,要隐藏掉)</p>
+<pre><code>&lt;!-- values/styles.xml: --&gt;
+&lt;style name=&quot;AppTheme&quot; parent=&quot;AppBaseTheme&quot;&gt;&lt;/style&gt;
+
+&lt;style name=&quot;AppBaseTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;
+    &lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;
+    &lt;item name=&quot;colorPrimaryDark&quot;&gt;@color/colorPrimaryDark&lt;/item&gt;
+    &lt;item name=&quot;colorAccent&quot;&gt;@color/colorAccent&lt;/item&gt;
+    &lt;!-- 设置Toolbar的标题颜色 --&gt;
+    &lt;item name=&quot;android:textColorPrimary&quot;&gt;@android:color/white&lt;/item&gt;
+&lt;/style&gt;
+
+&lt;!-- values-v21/styles.xml: --&gt;
+&lt;style name=&quot;AppTheme&quot; parent=&quot;AppBaseTheme&quot;&gt;
+    &lt;item name=&quot;android:statusBarColor&quot;&gt;@color/colorPrimaryDark&lt;/item&gt;
+    &lt;item name=&quot;android:windowTranslucentStatus&quot;&gt;true&lt;/item&gt;
+&lt;/style&gt;
+</code></pre><p> 经过以上设置，在5.0以上和4.4都能符合Material Design。</p>
+</li>
+<li><p>在java代码中让Toolbar显示：</p>
+<pre><code>private Toolbar mToolbar;
+mToolbar = (Toolbar) findViewById(R.id.toolbar);
+// 通过代码设置Toolbar [也能在xml中设置]
+toolbar.setLogo(R.drawable.ic_launcher);
+toolbar.setTitle(&quot;My Title&quot;);
+toolbar.setSubtitle(&quot;Sub title&quot;);
+setSupportActionBar(toolbar);
+// Navigation Icon要设置在setSupoortActionBar之后才有作用
+toolbar.setNavigationIcon(R.mipmap.ic_android);
+</code></pre></li>
+<li><p>菜单的创建：在res/menu/xx_menu.xml中定义</p>
+<pre><code>&lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;&gt;
+    &lt;!-- orderInCategory:排列顺序,越小越靠前 --&gt;
+    &lt;!-- app:showAsAction:
+                ifRoom 有空间就显示
+                never 不显示,藏到三个点之中 --&gt;
+    &lt;item 
+        android:id=&quot;@+id/action_search&quot;
+        android:title=&quot;search&quot;
+        android:orderInCategory=&quot;90&quot;
+        android:icon=&quot;@mipmap/ic_search&quot;
+        app:showAsAction=&quot;ifRoom&quot; /&gt;
+
+  &lt;item android:id=&quot;@+id/action_settings&quot;
+        android:title=&quot;settings&quot;
+        android:orderInCategory=&quot;100&quot;
+        android:icon=&quot;@mipmap/ic_settings&quot;
+        app:showAsAction=&quot;never&quot;/&gt;
+&lt;/menu&gt;
+</code></pre><p> 在java代码中加入OnMenuItemClickListener监听者</p>
+<pre><code>private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
+    public boolean onMenuItemClick(MenuItem menuItem) {
+    switch (menuItem.getItemId()) {
+      case R.id.action_search:
+        break;
+      case R.id.action_settings:
+        break;
+    }
+    return true;
+    }
+};
+</code></pre><p> 设置OnMenuItemClickListener的监听者：</p>
+<pre><code>// Menu item click 的监听事件也要设置在setSupportActionBar之后才有作用
+toolbar.setOnMenuItemClickListener(onMenuItemClick);
+</code></pre></li>
+<li><p>Action Menu Item 的文字颜色设置问题</p>
+<blockquote>
+<p>按照上面的写法，Toolbar菜单中的文字颜色将会和Toolbar标题颜色一样</p>
+<ul>
+<li>首先在布局文件中给Toolbar加一条popupTheme属性： <ul>
+<li>app:popupTheme=”@style/ToolbarTheme.PopupOverlay”</li>
+</ul>
+</li>
+<li>在style中创建该样式[v21-style中创建相同的代码]并如下定义:</li>
+</ul>
+</blockquote>
+<pre><code>&lt;style name=&quot;ToolbarTheme.PopupOverlay&quot; parent=&quot;@style/ThemeOverlay.AppCompat.ActionBar&quot;&gt;
+    &lt;item name=&quot;android:textColorPrimary&quot;&gt;@color/black&lt;/item&gt;
+&lt;/style&gt;
+</code></pre><ul>
+<li>若想更改Toolbar菜单的默认图标(三个点)，则在布局文件中给Toolbar加一条theme属性：<ul>
+<li>app:theme=”@style/ToolbarTheme”</li>
+</ul>
+</li>
+<li><p>在style中创建该样式[v21-style中只需创建第一个]并如下定义:</p>
+<pre><code>&lt;style name=&quot;ToolbarTheme&quot;&gt;
+    &lt;item name=&quot;actionOverflowButtonStyle&quot;&gt;@style/ActionButton.Overflow.WeChat&lt;/item&gt;
+&lt;/style&gt;
+
+&lt;style name=&quot;ActionButton.Overflow.WeChat&quot; parent=&quot;android:style/Widget.Holo.Light.ActionButton.Overflow&quot;&gt;
+    &lt;item name=&quot;android:src&quot;&gt;@mipmap/ic_add&lt;/item&gt;
+&lt;/style&gt;
+</code></pre></li>
+<li><p>若想更改菜单出现位置，背景色，则在AppBaseTheme中加一个条目：</p>
+<pre><code>&lt;item name=&quot;actionOverflowMenuStyle&quot;&gt;@style/MenuStyle&lt;/item&gt;
+</code></pre></li>
+<li><p>然后在style.xml中创建该样式：</p>
+<pre><code>&lt;style name=&quot;MenuStyle&quot; parent=&quot;@style/Widget.AppCompat.Light.PopupMenu.Overflow&quot;&gt;
+    &lt;item name=&quot;overlapAnchor&quot;&gt;false&lt;/item&gt;
+    &lt;item name=&quot;android:popupBackground&quot;&gt;@color/colorPrimary&lt;/item&gt;
+    &lt;item name=&quot;android:dropDownVerticalOffset&quot;&gt;0dip&lt;/item&gt;
+&lt;/style&gt;
+</code></pre><ul>
+<li>必须设置parent为<code>Widget.AppCompat.Light.PopupMenu.Overflow</code>，这是Toolbar菜单默认样式的父类。<code>overlapAnchor</code>设置菜单不遮盖Toolbar， <code>popupBackground</code>设置背景色， <code>dropDownVerticalOffset</code>设置菜单与标题栏的垂直间距</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/09/Pull-Request/" rel="next" title="Pull Request">
+                <i class="fa fa-chevron-left"></i> Pull Request
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/08/Android-JNI/" rel="prev" title="Android JNI">
+                Android JNI <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400"
+               alt="MO Lulu" />
+          <p class="site-author-name" itemprop="name">MO Lulu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MO Lulu</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

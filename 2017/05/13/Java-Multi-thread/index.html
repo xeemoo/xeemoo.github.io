@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="第一章 线程安全问题会出现在实例变量上，方法内部私有变量不会出现线程安全问题 i--;的实际过程分为3个步骤，所以在多个线程执行这一句语句也会出现非线程安全 System.out.println(i--);的线程安全问题：println()是sync方法，但是i--可能在进入方法之前先执行，此语句也是非线程安全的 如果将Thread对象以构造参数的方式传给一个Thread对象，Thread.cur">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Multi thread">
+<meta property="og:url" content="http://yoursite.com/2017/05/13/Java-Multi-thread/index.html">
+<meta property="og:site_name" content="XF-zhjnc.github.io">
+<meta property="og:description" content="第一章 线程安全问题会出现在实例变量上，方法内部私有变量不会出现线程安全问题 i--;的实际过程分为3个步骤，所以在多个线程执行这一句语句也会出现非线程安全 System.out.println(i--);的线程安全问题：println()是sync方法，但是i--可能在进入方法之前先执行，此语句也是非线程安全的 如果将Thread对象以构造参数的方式传给一个Thread对象，Thread.cur">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-07-27T13:41:03.603Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java Multi thread">
+<meta name="twitter:description" content="第一章 线程安全问题会出现在实例变量上，方法内部私有变量不会出现线程安全问题 i--;的实际过程分为3个步骤，所以在多个线程执行这一句语句也会出现非线程安全 System.out.println(i--);的线程安全问题：println()是sync方法，但是i--可能在进入方法之前先执行，此语句也是非线程安全的 如果将Thread对象以构造参数的方式传给一个Thread对象，Thread.cur">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/13/Java-Multi-thread/"/>
+
+
+
+
+
+  <title>Java Multi thread | XF-zhjnc.github.io</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XF-zhjnc.github.io</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/13/Java-Multi-thread/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MO Lulu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XF-zhjnc.github.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java Multi thread</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-13T22:18:27+08:00">
+                2017-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><ol>
+<li>线程安全问题会出现在实例变量上，方法内部私有变量不会出现线程安全问题</li>
+<li><code>i--;</code>的实际过程分为3个步骤，所以在多个线程执行这一句语句也会出现非线程安全</li>
+<li><code>System.out.println(i--);</code>的线程安全问题：println()是sync方法，但是<code>i--</code>可能在进入方法之前先执行，此语句也是非线程安全的</li>
+<li>如果将Thread对象以构造参数的方式传给一个Thread对象，<code>Thread.currentThread()</code>和<code>this</code>指的不是同一个线程对象</li>
+<li><code>sleep(long)</code>是使当前正在执行的线程(this.currentThread()返回的)进入休眠</li>
+<li>停止线程的方法：使用interrupt()给线程打一个停止标记，自行判断该标记通过抛异常方式停止线程执行<a id="more"></a></li>
+<li>判断线程的停止标记<ol>
+<li>thread.interrupted()：static方法，测试当前线程是否已中断，”当前线程”指运行这个语句的线程，而不是thread表示的线程，此方法会清除线程中断标志</li>
+<li>thread.isInterrupted()：测试thread是否已中断，不会清除线程中断标志</li>
+</ol>
+</li>
+<li>在sleep()状态下停止线程，会抛出异常，并会清除线程中断标志</li>
+<li>线程优先级具有继承性：如果A线程启动了B线程，那么B线程会继承A线程的优先级</li>
+<li>守护线程：当进程中不存在非守护线程时，守护线程会自动销毁。setDaemon(true)设置为守护线程</li>
+</ol>
+<h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><ol>
+<li>使用synchronized修饰普通方法时，获取的锁是当前对象锁，当某一线程持有了该对象锁，其它线程想要执行需要此对象锁的sync方法都会被阻塞</li>
+<li>synchronized的锁可以是任意对象，持同一对象的sync代码是同步执行的</li>
+<li>使用synchronized修饰static方法时，表示对当前*.java文件对应的class持锁，和对象锁是不同的</li>
+<li>进入sleep的线程不会释放锁，出现异常时线程会释放锁</li>
+<li>synchronized的锁重入：<ol>
+<li>当一个线程得到锁后，再次请求是一定会得到的，即可以在一个sync方法中调用另一个sync方法</li>
+<li>子类可通过此特性立即获得父类锁(父类锁没被占有的情况下)，调用父类同步方法</li>
+</ol>
+</li>
+<li>同步方法不会被继承，子类重写父类sync方法时，不加sync则失去同步效果，加sync才能同步</li>
+<li><p>数据类型String具有常量池缓存功能</p>
+<pre><code>String a = &quot;a&quot;;
+String b = &quot;a&quot;;
+a == b;   // true
+</code></pre><p> 因此大多数情况下应避免使用String作为锁对象</p>
+</li>
+<li>对象的属性改变并不影响锁：例如原来lock=”123”，后来再赋值lock=”456”，还是同一个锁对象</li>
+<li><code>volatile</code>关键字用于修饰变量，使变量在多个线程间可见。每个线程都会有一个自己的私有栈存放变量，写入和读取都在私有栈上可提高效率，但会出现值修改后线程间不同步的现象，volatile强制线程从主内存中读写变量，使变量的更新对其它线程可见</li>
+<li>多线程访问volatile不会阻塞，volatile只保证数据的可见性，但不保证原子性，可能会出现非线程安全</li>
+<li>将变量作为参数传给synchronized也可以实现可见性</li>
+<li>volatile与synchronized的区别：<ol>
+<li>volatile解决的是变量在多个线程之间的可见性</li>
+<li>synchronized解决的是多个线程之间访问资源的同步性</li>
+</ol>
+</li>
+</ol>
+<h3 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h3><ol>
+<li>wait/notify机制<ol>
+<li>wait/notify/notifyAll都是在sync代码块中使用的</li>
+<li>调用wait()之前线程要获得该对象的对象级别的锁，调用notify时持相同的锁</li>
+<li>notify()调用后并不是立即释放锁，只有等到执行完notify()所在的sync代码块后才会释放锁</li>
+</ol>
+</li>
+<li>join()方法内部使用的是wait()实现，与sleep不同，join会释放锁</li>
+<li>ThreadLocal类用于给每个对象绑定自己的私有数据，解决了变量在不同线程之间的隔离性</li>
+</ol>
+<h3 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h3><ul>
+<li>java.util.concurrent.locks.Lock</li>
+<li>java.util.concurrent.locks.ReentrantLock</li>
+<li><p>java.util.concurrent.locks.Condition</p>
+<pre><code>Lock lock = new ReentrantLock();
+当线程执行了lock.lock()后，在执行lock.unlock()之前，中间的程序是加锁的
+Condition c = lock.newCondition();
+当线程执行了lock.lock()获得锁后，便可调用c.await()使线程进入WAITING状态，并释放锁
+使用另一线程获得锁后，执行c.signal()将被c对象await的线程唤醒
+
+使用多个Condition对象，则调用某个c.signal()/signalAll()只会唤醒调用了c.await()的线程
+</code></pre></li>
+<li><p>Lock类分为公平锁和非公平锁</p>
+<pre><code>Lock lock = new ReentrantLock(Boolean );
+true表示公平锁，线程获得锁的顺序按照线程来到lock.lock()的顺序
+false表示非公平锁，则线程按抢占式获得锁
+</code></pre></li>
+<li><p>读写锁ReentrantReadWriteLock:</p>
+<pre><code>Lock lock = new ReentrantReadWriteLock();
+lock.readLock().lock();
+lock.writeLock().lock();
+</code></pre><p>  读锁是共享锁，可多线程获得。<br>  写锁是排他锁，获得此锁后其它线程在此锁释放前不可以获读、写锁</p>
+</li>
+</ul>
+<h3 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h3><ol>
+<li>java.util.Timer 用于设置计划任务，负责在指定的时间执行某个任务</li>
+<li><p>java.util.TimerTask  封装任务的内容。抽象类，implements Runnable.</p>
+<pre><code>timer.schedule(TimerTask task, Date time)
+//Date若晚于当前时间，则到时间执行，若早于当前时间则立即执行
+//一个Timer可以schedule多个TimerTask，Task会按设置顺序依次执行
+
+timer.schedule(TimerTask task, Date firstTime, long period)
+//在指定日期后，按指定周期循环执行
+</code></pre></li>
+<li>task.cancel() 将自身从任务队列中清除；timer.cancel() 清除任务队列</li>
+<li><p>timer.scheduleAtFixedRate(TimerTask task, Date firstTime, long period)</p>
+<pre><code>与schedule的区别：schedule()没有追赶性，此方法没有追赶性
+
+追赶性：计划执行时间早于当前时间，那么少掉的那些任务项scheduleAtFixedRate()会立即开始全部执行回来
+</code></pre></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/14/Java-GC/" rel="next" title="Java GC">
+                <i class="fa fa-chevron-left"></i> Java GC
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/18/Study-RxJava/" rel="prev" title="Study Rxjava">
+                Study Rxjava <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400"
+               alt="MO Lulu" />
+          <p class="site-author-name" itemprop="name">MO Lulu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一章"><span class="nav-number">1.</span> <span class="nav-text">第一章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二章"><span class="nav-number">2.</span> <span class="nav-text">第二章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三章"><span class="nav-number">3.</span> <span class="nav-text">第三章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四章"><span class="nav-number">4.</span> <span class="nav-text">第四章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五章"><span class="nav-number">5.</span> <span class="nav-text">第五章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MO Lulu</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

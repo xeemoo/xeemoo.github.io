@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Algorithm," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="实现思路每个新进程在加入系统时，必须申明在运行中可能需要的每种资源类型的最大单元数目，其数目不应超过系统所拥有资源的总量。当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。若可以分配，需进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。如果不会才分配资源，否则让进程等待。">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Banker&#39;s Algorithm">
+<meta property="og:url" content="http://yoursite.com/2016/11/23/Banker's-Algorithm/index.html">
+<meta property="og:site_name" content="XF-zhjnc.github.io">
+<meta property="og:description" content="实现思路每个新进程在加入系统时，必须申明在运行中可能需要的每种资源类型的最大单元数目，其数目不应超过系统所拥有资源的总量。当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。若可以分配，需进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。如果不会才分配资源，否则让进程等待。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-07-27T13:41:55.938Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Banker&#39;s Algorithm">
+<meta name="twitter:description" content="实现思路每个新进程在加入系统时，必须申明在运行中可能需要的每种资源类型的最大单元数目，其数目不应超过系统所拥有资源的总量。当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。若可以分配，需进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。如果不会才分配资源，否则让进程等待。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/23/Banker's-Algorithm/"/>
+
+
+
+
+
+  <title>Banker's Algorithm | XF-zhjnc.github.io</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XF-zhjnc.github.io</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/23/Banker's-Algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MO Lulu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XF-zhjnc.github.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Banker's Algorithm</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-23T17:04:31+08:00">
+                2016-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><p>每个新进程在加入系统时，必须申明在运行中可能需要的每种资源类型的最大单元数目，其数目不应超过系统所拥有资源的总量。当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。若可以分配，需进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。如果不会才分配资源，否则让进程等待。<br><a id="more"></a></p>
+<h3 id="需要定义的数据结构"><a href="#需要定义的数据结构" class="headerlink" title="需要定义的数据结构"></a>需要定义的数据结构</h3><ol>
+<li>可利用资源向量<code>Available</code>，是个含有m个元素的数组，其中的每一个元素代表一类可利用的资源数目。如果Available[j]=K，则表示系统中现有Rj类资源K个。</li>
+<li>最大需求矩阵<code>Max</code>，这是一个n×m的矩阵，它定义了系统中n个进程中的每一个进程对m类资源的最大需求。如果Max[i,j]=K，则表示进程i需要Rj类资源的最大数目为K。</li>
+<li>分配矩阵<code>Allocation</code>，这也是一个n×m的矩阵，它定义了系统中每一类资源当前已分配给每一进程的资源数。如果Allocation[i,j]=K，则表示进程i当前已分得Rj类资源的数目为K。</li>
+<li>需求矩阵<code>Need</code>，这也是一个n×m的矩阵，用以表示每一个进程尚需的各类资源数。如果Need[i,j]=K，则表示进程i还需要Rj类资源K个，方能完成其任务。</li>
+<li>矩阵间的关系：<code>Need[i,j]=Max[i,j]-Allocation[i,j]</code></li>
+</ol>
+<h3 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h3><pre><code>设进程P提出请求Request[i]，则银行家算法按如下规则进行判断。
+(1)如果Request[P][i] &lt;= Need[P][i]，则转（2)；否则，出错。
+(2)如果Request[P][i] &lt;= Available[i]，则转（3)；否则，等待。
+(3)系统试探分配资源，修改相关数据：
+    Available[i] -= Request[P][i];
+    Allocation[P][i] += Request[P][i];
+    Need[P][i] -= Request[P][i];
+(4)系统执行安全性检查，如安全，则分配成立；否则试探险性分配作废，系统恢复原状，进程等待。
+</code></pre><h3 id="安全性检查"><a href="#安全性检查" class="headerlink" title="安全性检查"></a>安全性检查</h3><pre><code>(1)设置两个工作向量 Work = Available; Finish = {false...}
+(2)从进程集合中找到一个满足下述条件的进程，
+    Finish == false;
+    Need &lt;= Work;
+    如找到，执行(3)；否则，执行(4)
+(3)设进程获得资源，可顺利执行，直至完成，从而释放资源。
+    Work = Work + Allocation;
+    Finish = true;
+    返回(2);
+(4)如所有的进程Finish = true，则表示安全；否则系统不安全。
+</code></pre><p>结束条件合理性的证明：<a href="http://blog.csdn.net/trium_kw/article/details/51289610" target="_blank" rel="external">银行家算法结束条件的合理性证明</a>    !!未求证正确性!!</p>
+<h3 id="使用回溯的安全性检查"><a href="#使用回溯的安全性检查" class="headerlink" title="使用回溯的安全性检查"></a>使用回溯的安全性检查</h3><pre><code>#include&lt;iostream&gt;
+#include&lt;stack&gt;
+#include&lt;string.h&gt;
+#include&lt;windows.h&gt;
+#define P 100  // 最大进程数
+#define R 50   // 最大资源类数
+using namespace std;
+
+int Available[R], Max[P][R], Allocation[P][R], Need[P][R], Request[R];
+int TempAvailable[R], TempAllocation[P][R], TempNeed[P][R];
+int NumP = 0, NumR = 0;
+bool safety; //安全状态
+void check();
+
+void init() {
+    memset(Available, 0, sizeof(Available));
+    memset(TempAvailable, 0, sizeof(TempAvailable));
+    memset(Max, 0, sizeof(Max));
+    memset(Allocation, 0, sizeof(Allocation));
+    memset(TempAllocation, 0, sizeof(TempAllocation));
+    memset(Need, 0, sizeof(Need));
+    memset(TempNeed, 0, sizeof(TempNeed));
+    memset(Request, 0, sizeof(Request));
+
+    cout &lt;&lt; &quot;输入进程个数和资源个数：&quot; &lt;&lt; endl;
+    cin &gt;&gt; NumP &gt;&gt; NumR;
+    cout &lt;&lt; &quot;输入各进程最大资源需求(Max矩阵)：&quot; &lt;&lt; endl;
+    for (int i = 0; i &lt; NumP; i++) {
+        for (int j = 0; j &lt; NumR; j++) {
+            cin &gt;&gt; Max[i][j];
+        }
+    }
+    cout &lt;&lt; &quot;输入各进程已分配资源(Allocation矩阵)：&quot; &lt;&lt; endl;
+    for (int i = 0; i &lt; NumP; i++) {
+        for (int j = 0; j &lt; NumR; j++) {
+            cin &gt;&gt; Allocation[i][j];
+        }
+    }
+    cout &lt;&lt; &quot;输入可分配资源数(Available向量)：&quot; &lt;&lt; endl;
+    for (int j = 0; j &lt; NumR; j++) {
+        cin &gt;&gt; Available[j];
+    }
+    for (int i = 0; i &lt; NumP; i++) {
+        for (int j = 0; j &lt; NumR; j++) {
+            Need[i][j] = Max[i][j] - Allocation[i][j];
+        }
+    }
+}
+
+void bank(int pid, int request[R]) {
+    bool flag = true;
+    for (int j = 0; j &lt; NumR; j++) {
+        if (request[j] &gt; Need[pid][j] || request[j] &gt; Available[j]) {
+            cout &lt;&lt; &quot;请求资源数量超过进程需求量or系统可用资源数&quot; &lt;&lt; endl;
+            flag = false;
+        }
+    }
+    if (flag) {
+        //保存当前各矩阵的值
+        memcpy(TempAvailable, Available, sizeof(TempAvailable));
+        memcpy(TempAllocation, Allocation, sizeof(TempAllocation));
+        memcpy(TempNeed, Need, sizeof(TempNeed));
+
+        for (int j = 0; j &lt; NumR; j++) {
+            Available[j] -= request[j];
+            Allocation[pid][j] += request[j];
+            Need[pid][j] -= request[j];
+        }
+        check();
+    }
+    Sleep(1000);
+}
+
+void check() {
+    stack&lt;int&gt; stk;
+    safety = true;
+    int k = 0; //已成功处理的进程数
+    bool have; //记录某次遍历是否有入栈操作
+    bool found = false; //是否找到满足条件的进程
+    int XL[P] = { 0 }; int v = 0; //记录序列
+    int Work[P];
+    bool Finish[P];
+    // 初始化Work[]和Finish[]
+    memcpy(Work, Available, sizeof(Work));
+    for (int i = 0; i &lt; P; i++) {
+        Finish[i] = false;
+    }
+
+    do {
+        have = false;
+        for (int i = 0; i &lt; NumP; i++) {
+            if (!Finish[i]) {
+                found = true;
+                for (int j = 0; j &lt; NumR; j++) {
+                    if (Need[i][j] &gt; Work[j]) {
+                        found = false;
+                    }
+                }
+                if (found) {
+                    //入栈
+                    stk.push(i);
+                    have = true;
+                    found = false;
+                }
+            }
+        }
+        if (!have) {
+            if (k == 0) {
+                //从没有加入过
+                break;
+            }
+            //回退
+            v--;
+            int id = XL[v];
+            XL[v] = 0;
+            Finish[id] = false;
+            for (int j = 0; j &lt; NumR; j++) {
+                Work[j] -= Allocation[id][j];
+            }
+            k--;
+        }
+        if (!stk.empty()) {
+            int id = stk.top();
+            stk.pop();
+            Finish[id] = true;
+            for (int j = 0; j &lt; NumR; j++) {
+                Work[j] += Allocation[id][j];
+            }
+            k++;
+            XL[v++] = id;
+        }
+    } while (k &lt; NumP);
+
+    if (k == 0) {
+        safety = false;
+        cout &lt;&lt; &quot;系统处于不安全状态&quot; &lt;&lt; endl;
+    } else {
+        safety = true;
+        cout &lt;&lt; &quot;安全序列为：&quot;;
+        for (int i = 0; i &lt; NumP; i++) {
+            cout &lt;&lt; &quot;P&quot; &lt;&lt; XL[i] &lt;&lt; &quot;  &quot;;
+        }
+        cout &lt;&lt; endl;
+    }
+}
+
+void status() {
+    cout &lt;&lt; endl &lt;&lt; &quot;------------------------------------------------&quot; &lt;&lt; endl;
+    int i, j;
+    cout &lt;&lt; &quot;当前状态：&quot; &lt;&lt; endl;
+    cout &lt;&lt; &quot;PID    Max    Allocation    Need&quot; &lt;&lt; endl;
+    for (i = 0; i &lt; NumP; i++) {
+        cout &lt;&lt; i &lt;&lt; &quot;     &quot;;
+        for (j = 0; j &lt; NumR; j++) {
+            cout &lt;&lt; Max[i][j] &lt;&lt; &quot;  &quot;;
+        }
+        cout &lt;&lt; &quot;  |  &quot;;
+        for (j = 0; j &lt; NumR; j++) {
+            cout &lt;&lt; Allocation[i][j] &lt;&lt; &quot;  &quot;;
+        }
+        cout &lt;&lt; &quot;  |  &quot;;
+        for (j = 0; j &lt; NumR; j++) {
+            cout &lt;&lt; Need[i][j] &lt;&lt; &quot;  &quot;;
+        }
+        cout &lt;&lt; endl;
+    }
+    cout &lt;&lt; &quot;系统可用资源：&quot; &lt;&lt; endl;
+    for (j = 0; j &lt; NumR; j++) {
+        cout &lt;&lt; Available[j] &lt;&lt; &quot;  &quot;;
+    }
+    cout &lt;&lt; endl;
+    cout &lt;&lt; endl &lt;&lt; &quot;------------------------------------------------&quot; &lt;&lt; endl;
+}
+
+int main()
+{
+    init();
+    status();
+    int PID = -1;
+    while (true) {
+        cout &lt;&lt; &quot;请输入进程ID:&quot; &lt;&lt; endl;
+        cin &gt;&gt; PID;
+        if (PID &gt;= 0 &amp;&amp; PID &lt; NumP) {
+            cout &lt;&lt; &quot;请输入请求资源数:&quot; &lt;&lt; endl;
+            for (int j = 0; j &lt; NumR; j++) {
+                cin &gt;&gt; Request[j];
+            }
+            bank(PID, Request);
+            if (!safety) {
+                memcpy(Available, TempAvailable, sizeof(Available));
+                memcpy(Allocation, TempAllocation, sizeof(Allocation));
+                memcpy(Need, TempNeed, sizeof(Need));
+            }
+            status();
+        } else {
+            cout &lt;&lt; &quot;进程ID不合法&quot; &lt;&lt; endl;
+        }
+    }
+    return 0;
+}
+</code></pre><hr>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/22/Xposed-Developed/" rel="next" title="Xposed Developed">
+                <i class="fa fa-chevron-left"></i> Xposed Developed
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/09/Pull-Request/" rel="prev" title="Pull Request">
+                Pull Request <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400"
+               alt="MO Lulu" />
+          <p class="site-author-name" itemprop="name">MO Lulu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现思路"><span class="nav-number">1.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需要定义的数据结构"><span class="nav-number">2.</span> <span class="nav-text">需要定义的数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#银行家算法"><span class="nav-number">3.</span> <span class="nav-text">银行家算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全性检查"><span class="nav-number">4.</span> <span class="nav-text">安全性检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用回溯的安全性检查"><span class="nav-number">5.</span> <span class="nav-text">使用回溯的安全性检查</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MO Lulu</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
