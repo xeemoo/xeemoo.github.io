@@ -2,6 +2,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
 
@@ -9,7 +18,12 @@
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+
+
 
 
 
@@ -36,36 +50,11 @@
 
 
 
+
   
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
@@ -74,37 +63,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Java," />
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
 
 
 
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
 
 
 
 
 
 
-<meta name="description" content="第一章 线程安全问题会出现在实例变量上，方法内部私有变量不会出现线程安全问题 i--;的实际过程分为3个步骤，所以在多个线程执行这一句语句也会出现非线程安全 System.out.println(i--);的线程安全问题：println()是sync方法，但是i--可能在进入方法之前先执行，此语句也是非线程安全的 如果将Thread对象以构造参数的方式传给一个Thread对象，Thread.cur">
-<meta name="keywords" content="Java">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java Multi thread">
-<meta property="og:url" content="http://yoursite.com/2017/05/13/Java-Multi-thread/index.html">
-<meta property="og:site_name" content="XF-zhjnc.github.io">
-<meta property="og:description" content="第一章 线程安全问题会出现在实例变量上，方法内部私有变量不会出现线程安全问题 i--;的实际过程分为3个步骤，所以在多个线程执行这一句语句也会出现非线程安全 System.out.println(i--);的线程安全问题：println()是sync方法，但是i--可能在进入方法之前先执行，此语句也是非线程安全的 如果将Thread对象以构造参数的方式传给一个Thread对象，Thread.cur">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-07-27T13:41:03.603Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java Multi thread">
-<meta name="twitter:description" content="第一章 线程安全问题会出现在实例变量上，方法内部私有变量不会出现线程安全问题 i--;的实际过程分为3个步骤，所以在多个线程执行这一句语句也会出现非线程安全 System.out.println(i--);的线程安全问题：println()是sync方法，但是i--可能在进入方法之前先执行，此语句也是非线程安全的 如果将Thread对象以构造参数的方式传给一个Thread对象，Thread.cur">
+
+
 
 
 
@@ -113,13 +84,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -131,12 +102,38 @@
 </script>
 
 
-
-  <link rel="canonical" href="http://yoursite.com/2017/05/13/Java-Multi-thread/"/>
-
+  
 
 
 
+
+  <meta name="description" content="《Java多线程编程核心技术》笔记">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Multi thread">
+<meta property="og:url" content="https://XF-zhjnc.github.io/2017/05/13/Java-Multi-thread/index.html">
+<meta property="og:site_name" content="XF-zhjnc.github.io">
+<meta property="og:description" content="《Java多线程编程核心技术》笔记">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-07-31T02:25:05.464Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java Multi thread">
+<meta name="twitter:description" content="《Java多线程编程核心技术》笔记">
+
+
+
+
+
+
+  <link rel="canonical" href="https://XF-zhjnc.github.io/2017/05/13/Java-Multi-thread/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>Java Multi thread | XF-zhjnc.github.io</title>
   
@@ -149,10 +146,32 @@
 
 
 
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
 
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
 
-
-
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
 </head>
 
@@ -163,7 +182,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -172,19 +191,17 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">XF-zhjnc.github.io</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="Toggle navigation bar">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -192,55 +209,53 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            About
-          </a>
-        </li>
-      
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
 
       
+      
     </ul>
+  
+
+  
+    
+
   
 
   
@@ -248,12 +263,20 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
 
@@ -266,13 +289,19 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/13/Java-Multi-thread/">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://XF-zhjnc.github.io/2017/05/13/Java-Multi-thread/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MO Lulu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -284,11 +313,19 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java Multi thread</h1>
+          <h1 class="post-title" itemprop="name headline">Java Multi thread
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -296,11 +333,12 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-13T22:18:27+08:00">
-                2017-05-13
-              </time>
-            
 
+              
+                
+              
+
+              <time title="Created: 2017-05-13 00:00:00" itemprop="dateCreated datePublished" datetime="2017-05-13T00:00:00+08:00">2017-05-13</time>
             
 
             
@@ -325,19 +363,24 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><ol>
+        <p>《Java多线程编程核心技术》笔记</p>
+<a id="more"></a>
+<h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><ol>
 <li>线程安全问题会出现在实例变量上，方法内部私有变量不会出现线程安全问题</li>
 <li><code>i--;</code>的实际过程分为3个步骤，所以在多个线程执行这一句语句也会出现非线程安全</li>
 <li><code>System.out.println(i--);</code>的线程安全问题：println()是sync方法，但是<code>i--</code>可能在进入方法之前先执行，此语句也是非线程安全的</li>
 <li>如果将Thread对象以构造参数的方式传给一个Thread对象，<code>Thread.currentThread()</code>和<code>this</code>指的不是同一个线程对象</li>
 <li><code>sleep(long)</code>是使当前正在执行的线程(this.currentThread()返回的)进入休眠</li>
-<li>停止线程的方法：使用interrupt()给线程打一个停止标记，自行判断该标记通过抛异常方式停止线程执行<a id="more"></a></li>
+<li>停止线程的方法：使用interrupt()给线程打一个停止标记，自行判断该标记通过抛异常方式停止线程执行</li>
 <li>判断线程的停止标记<ol>
 <li>thread.interrupted()：static方法，测试当前线程是否已中断，”当前线程”指运行这个语句的线程，而不是thread表示的线程，此方法会清除线程中断标志</li>
 <li>thread.isInterrupted()：测试thread是否已中断，不会清除线程中断标志</li>
@@ -359,10 +402,8 @@
 </li>
 <li>同步方法不会被继承，子类重写父类sync方法时，不加sync则失去同步效果，加sync才能同步</li>
 <li><p>数据类型String具有常量池缓存功能</p>
-<pre><code>String a = &quot;a&quot;;
-String b = &quot;a&quot;;
-a == b;   // true
-</code></pre><p> 因此大多数情况下应避免使用String作为锁对象</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String a = <span class="string">"a"</span>;</span><br><span class="line">String b = <span class="string">"a"</span>;</span><br><span class="line">a == b;   <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p> 因此大多数情况下应避免使用String作为锁对象</p>
 </li>
 <li>对象的属性改变并不影响锁：例如原来lock=”123”，后来再赋值lock=”456”，还是同一个锁对象</li>
 <li><code>volatile</code>关键字用于修饰变量，使变量在多个线程间可见。每个线程都会有一个自己的私有栈存放变量，写入和读取都在私有栈上可提高效率，但会出现值修改后线程间不同步的现象，volatile强制线程从主内存中读写变量，使变量的更新对其它线程可见</li>
@@ -388,67 +429,41 @@ a == b;   // true
 <li>java.util.concurrent.locks.Lock</li>
 <li>java.util.concurrent.locks.ReentrantLock</li>
 <li><p>java.util.concurrent.locks.Condition</p>
-<pre><code>Lock lock = new ReentrantLock();
-当线程执行了lock.lock()后，在执行lock.unlock()之前，中间的程序是加锁的
-Condition c = lock.newCondition();
-当线程执行了lock.lock()获得锁后，便可调用c.await()使线程进入WAITING状态，并释放锁
-使用另一线程获得锁后，执行c.signal()将被c对象await的线程唤醒
-
-使用多个Condition对象，则调用某个c.signal()/signalAll()只会唤醒调用了c.await()的线程
-</code></pre></li>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">当线程执行了lock.lock()后，在执行lock.unlock()之前，中间的程序是加锁的</span><br><span class="line">Condition c = lock.newCondition();</span><br><span class="line">当线程执行了lock.lock()获得锁后，便可调用c.await()使线程进入WAITING状态，并释放锁</span><br><span class="line">使用另一线程获得锁后，执行c.signal()将被c对象await的线程唤醒</span><br><span class="line"></span><br><span class="line">使用多个Condition对象，则调用某个c.signal()/signalAll()只会唤醒调用了c.await()的线程</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>Lock类分为公平锁和非公平锁</p>
-<pre><code>Lock lock = new ReentrantLock(Boolean );
-true表示公平锁，线程获得锁的顺序按照线程来到lock.lock()的顺序
-false表示非公平锁，则线程按抢占式获得锁
-</code></pre></li>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Lock lock = <span class="keyword">new</span> ReentrantLock(Boolean );</span><br><span class="line"><span class="keyword">true</span>表示公平锁，线程获得锁的顺序按照线程来到lock.lock()的顺序</span><br><span class="line"><span class="keyword">false</span>表示非公平锁，则线程按抢占式获得锁</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>读写锁ReentrantReadWriteLock:</p>
-<pre><code>Lock lock = new ReentrantReadWriteLock();
-lock.readLock().lock();
-lock.writeLock().lock();
-</code></pre><p>  读锁是共享锁，可多线程获得。<br>  写锁是排他锁，获得此锁后其它线程在此锁释放前不可以获读、写锁</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Lock lock = <span class="keyword">new</span> ReentrantReadWriteLock();</span><br><span class="line">lock.readLock().lock();</span><br><span class="line">lock.writeLock().lock();</span><br></pre></td></tr></table></figure>
+<p>  读锁是共享锁，可多线程获得。<br>  写锁是排他锁，获得此锁后其它线程在此锁释放前不可以获读、写锁</p>
 </li>
 </ul>
 <h3 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h3><ol>
 <li>java.util.Timer 用于设置计划任务，负责在指定的时间执行某个任务</li>
-<li><p>java.util.TimerTask  封装任务的内容。抽象类，implements Runnable.</p>
-<pre><code>timer.schedule(TimerTask task, Date time)
-//Date若晚于当前时间，则到时间执行，若早于当前时间则立即执行
-//一个Timer可以schedule多个TimerTask，Task会按设置顺序依次执行
-
-timer.schedule(TimerTask task, Date firstTime, long period)
-//在指定日期后，按指定周期循环执行
-</code></pre></li>
+<li>java.util.TimerTask  封装任务的内容。抽象类，implements Runnable. <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">timer.schedule(TimerTask task, Date time)</span><br><span class="line"><span class="comment">//Date若晚于当前时间，则到时间执行，若早于当前时间则立即执行</span></span><br><span class="line"><span class="comment">//一个Timer可以schedule多个TimerTask，Task会按设置顺序依次执行</span></span><br><span class="line"></span><br><span class="line">timer.schedule(TimerTask task, Date firstTime, <span class="keyword">long</span> period)</span><br><span class="line"><span class="comment">//在指定日期后，按指定周期循环执行</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
 <li>task.cancel() 将自身从任务队列中清除；timer.cancel() 清除任务队列</li>
-<li><p>timer.scheduleAtFixedRate(TimerTask task, Date firstTime, long period)</p>
-<pre><code>与schedule的区别：schedule()没有追赶性，此方法没有追赶性
-
-追赶性：计划执行时间早于当前时间，那么少掉的那些任务项scheduleAtFixedRate()会立即开始全部执行回来
-</code></pre></li>
+<li>timer.scheduleAtFixedRate(TimerTask task, Date firstTime, long period) <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">与schedule的区别：schedule()没有追赶性，此方法没有追赶性</span><br><span class="line"></span><br><span class="line">追赶性：计划执行时间早于当前时间，那么少掉的那些任务项scheduleAtFixedRate()会立即开始全部执行回来</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 
       
     </div>
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -477,8 +492,8 @@ timer.schedule(TimerTask task, Date firstTime, long period)
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/18/Study-RxJava/" rel="prev" title="Study Rxjava">
-                Study Rxjava <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/18/Study-RxJava/" rel="prev" title="Study RxJava">
+                Study RxJava <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -488,6 +503,10 @@ timer.schedule(TimerTask task, Date firstTime, long period)
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -501,11 +520,8 @@ timer.schedule(TimerTask task, Date firstTime, long period)
           </div>
           
 
+  
 
-          
-  <div class="comments" id="comments">
-    
-  </div>
 
 
         </div>
@@ -528,66 +544,101 @@ timer.schedule(TimerTask task, Date firstTime, long period)
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             Table of Contents
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             Overview
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400"
-               alt="MO Lulu" />
-          <p class="site-author-name" itemprop="name">MO Lulu</p>
-           
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="MO Lulu" />
+            
+              <p class="site-author-name" itemprop="name">MO Lulu</p>
               <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
+          </div>
 
           
-            <div class="site-state-item site-state-posts">
-              <a href="/archives/">
-                <span class="site-state-item-count">10</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/XF-zhjnc" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhjncxf@outlook.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
             </div>
           
 
           
+          
+
+          
+          
 
           
             
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
+          
           
 
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
         </div>
-
-        
-        
-
-        
-        
-
-        
-
-
       </section>
 
       
@@ -620,30 +671,43 @@ timer.schedule(TimerTask task, Date firstTime, long period)
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-address-card-o"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">MO Lulu</span>
+
+  
+
+  
 </div>
 
 
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
 
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
 
         
+
+
+
+
+
+
+
 
         
       </div>
@@ -653,7 +717,11 @@ timer.schedule(TimerTask task, Date firstTime, long period)
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
+    
+
     
 
   </div>
@@ -674,68 +742,72 @@ timer.schedule(TimerTask task, Date firstTime, long period)
 
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
 
 
 
   
 
 
-  
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
 
+
+
+  
 
 
 
@@ -758,12 +830,25 @@ timer.schedule(TimerTask task, Date firstTime, long period)
 
 
 
+
+
+
+
   
 
 
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
   
 
   

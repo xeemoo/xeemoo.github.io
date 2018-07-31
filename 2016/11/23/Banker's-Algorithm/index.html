@@ -2,6 +2,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
 
@@ -9,7 +18,12 @@
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+
+
 
 
 
@@ -36,36 +50,11 @@
 
 
 
+
   
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
@@ -74,37 +63,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Algorithm," />
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
 
 
 
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
 
 
 
 
 
 
-<meta name="description" content="实现思路每个新进程在加入系统时，必须申明在运行中可能需要的每种资源类型的最大单元数目，其数目不应超过系统所拥有资源的总量。当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。若可以分配，需进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。如果不会才分配资源，否则让进程等待。">
-<meta name="keywords" content="Algorithm">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Banker&#39;s Algorithm">
-<meta property="og:url" content="http://yoursite.com/2016/11/23/Banker's-Algorithm/index.html">
-<meta property="og:site_name" content="XF-zhjnc.github.io">
-<meta property="og:description" content="实现思路每个新进程在加入系统时，必须申明在运行中可能需要的每种资源类型的最大单元数目，其数目不应超过系统所拥有资源的总量。当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。若可以分配，需进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。如果不会才分配资源，否则让进程等待。">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-07-27T13:41:55.938Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Banker&#39;s Algorithm">
-<meta name="twitter:description" content="实现思路每个新进程在加入系统时，必须申明在运行中可能需要的每种资源类型的最大单元数目，其数目不应超过系统所拥有资源的总量。当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。若可以分配，需进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。如果不会才分配资源，否则让进程等待。">
+
+
 
 
 
@@ -113,13 +84,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -131,12 +102,38 @@
 </script>
 
 
-
-  <link rel="canonical" href="http://yoursite.com/2016/11/23/Banker's-Algorithm/"/>
-
+  
 
 
 
+
+  <meta name="description" content="实现思路每个新进程在加入系统时，必须申明在运行中可能需要的每种资源类型的最大单元数目，其数目不应超过系统所拥有资源的总量。当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。若可以分配，需进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。如果不会才分配资源，否则让进程等待。 需要定义的数据结构 可利用资源向量Available，是个含有m个元素的数组，其中的每一个元素">
+<meta name="keywords" content="Operating System">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Banker&#39;s Algorithm">
+<meta property="og:url" content="https://XF-zhjnc.github.io/2016/11/23/Banker's-Algorithm/index.html">
+<meta property="og:site_name" content="XF-zhjnc.github.io">
+<meta property="og:description" content="实现思路每个新进程在加入系统时，必须申明在运行中可能需要的每种资源类型的最大单元数目，其数目不应超过系统所拥有资源的总量。当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。若可以分配，需进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。如果不会才分配资源，否则让进程等待。 需要定义的数据结构 可利用资源向量Available，是个含有m个元素的数组，其中的每一个元素">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-07-31T03:04:22.897Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Banker&#39;s Algorithm">
+<meta name="twitter:description" content="实现思路每个新进程在加入系统时，必须申明在运行中可能需要的每种资源类型的最大单元数目，其数目不应超过系统所拥有资源的总量。当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。若可以分配，需进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。如果不会才分配资源，否则让进程等待。 需要定义的数据结构 可利用资源向量Available，是个含有m个元素的数组，其中的每一个元素">
+
+
+
+
+
+
+  <link rel="canonical" href="https://XF-zhjnc.github.io/2016/11/23/Banker's-Algorithm/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>Banker's Algorithm | XF-zhjnc.github.io</title>
   
@@ -149,10 +146,32 @@
 
 
 
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
 
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
 
-
-
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
 </head>
 
@@ -163,7 +182,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -172,19 +191,17 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">XF-zhjnc.github.io</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="Toggle navigation bar">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -192,55 +209,53 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            About
-          </a>
-        </li>
-      
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
 
       
+      
     </ul>
+  
+
+  
+    
+
   
 
   
@@ -248,12 +263,20 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
 
@@ -266,13 +289,19 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/23/Banker's-Algorithm/">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://XF-zhjnc.github.io/2016/11/23/Banker's-Algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MO Lulu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -284,11 +313,19 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Banker's Algorithm</h1>
+          <h1 class="post-title" itemprop="name headline">Banker's Algorithm
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -296,11 +333,12 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-23T17:04:31+08:00">
-                2016-11-23
-              </time>
-            
 
+              
+                
+              
+
+              <time title="Created: 2016-11-23 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-23T00:00:00+08:00">2016-11-23</time>
             
 
             
@@ -325,270 +363,50 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><p>每个新进程在加入系统时，必须申明在运行中可能需要的每种资源类型的最大单元数目，其数目不应超过系统所拥有资源的总量。当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。若可以分配，需进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。如果不会才分配资源，否则让进程等待。<br><a id="more"></a></p>
-<h3 id="需要定义的数据结构"><a href="#需要定义的数据结构" class="headerlink" title="需要定义的数据结构"></a>需要定义的数据结构</h3><ol>
+        <h4 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h4><p>每个新进程在加入系统时，必须申明在运行中可能需要的每种资源类型的最大单元数目，其数目不应超过系统所拥有资源的总量。当进程请求一组资源时，系统必须首先确定是否有足够的资源分配给该进程。若可以分配，需进一步计算在将这些资源分配给进程后，是否会使系统处于不安全状态。如果不会才分配资源，否则让进程等待。</p>
+<h4 id="需要定义的数据结构"><a href="#需要定义的数据结构" class="headerlink" title="需要定义的数据结构"></a>需要定义的数据结构</h4><ol>
 <li>可利用资源向量<code>Available</code>，是个含有m个元素的数组，其中的每一个元素代表一类可利用的资源数目。如果Available[j]=K，则表示系统中现有Rj类资源K个。</li>
 <li>最大需求矩阵<code>Max</code>，这是一个n×m的矩阵，它定义了系统中n个进程中的每一个进程对m类资源的最大需求。如果Max[i,j]=K，则表示进程i需要Rj类资源的最大数目为K。</li>
 <li>分配矩阵<code>Allocation</code>，这也是一个n×m的矩阵，它定义了系统中每一类资源当前已分配给每一进程的资源数。如果Allocation[i,j]=K，则表示进程i当前已分得Rj类资源的数目为K。</li>
 <li>需求矩阵<code>Need</code>，这也是一个n×m的矩阵，用以表示每一个进程尚需的各类资源数。如果Need[i,j]=K，则表示进程i还需要Rj类资源K个，方能完成其任务。</li>
 <li>矩阵间的关系：<code>Need[i,j]=Max[i,j]-Allocation[i,j]</code></li>
 </ol>
-<h3 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h3><pre><code>设进程P提出请求Request[i]，则银行家算法按如下规则进行判断。
-(1)如果Request[P][i] &lt;= Need[P][i]，则转（2)；否则，出错。
-(2)如果Request[P][i] &lt;= Available[i]，则转（3)；否则，等待。
-(3)系统试探分配资源，修改相关数据：
-    Available[i] -= Request[P][i];
-    Allocation[P][i] += Request[P][i];
-    Need[P][i] -= Request[P][i];
-(4)系统执行安全性检查，如安全，则分配成立；否则试探险性分配作废，系统恢复原状，进程等待。
-</code></pre><h3 id="安全性检查"><a href="#安全性检查" class="headerlink" title="安全性检查"></a>安全性检查</h3><pre><code>(1)设置两个工作向量 Work = Available; Finish = {false...}
-(2)从进程集合中找到一个满足下述条件的进程，
-    Finish == false;
-    Need &lt;= Work;
-    如找到，执行(3)；否则，执行(4)
-(3)设进程获得资源，可顺利执行，直至完成，从而释放资源。
-    Work = Work + Allocation;
-    Finish = true;
-    返回(2);
-(4)如所有的进程Finish = true，则表示安全；否则系统不安全。
-</code></pre><p>结束条件合理性的证明：<a href="http://blog.csdn.net/trium_kw/article/details/51289610" target="_blank" rel="external">银行家算法结束条件的合理性证明</a>    !!未求证正确性!!</p>
-<h3 id="使用回溯的安全性检查"><a href="#使用回溯的安全性检查" class="headerlink" title="使用回溯的安全性检查"></a>使用回溯的安全性检查</h3><pre><code>#include&lt;iostream&gt;
-#include&lt;stack&gt;
-#include&lt;string.h&gt;
-#include&lt;windows.h&gt;
-#define P 100  // 最大进程数
-#define R 50   // 最大资源类数
-using namespace std;
-
-int Available[R], Max[P][R], Allocation[P][R], Need[P][R], Request[R];
-int TempAvailable[R], TempAllocation[P][R], TempNeed[P][R];
-int NumP = 0, NumR = 0;
-bool safety; //安全状态
-void check();
-
-void init() {
-    memset(Available, 0, sizeof(Available));
-    memset(TempAvailable, 0, sizeof(TempAvailable));
-    memset(Max, 0, sizeof(Max));
-    memset(Allocation, 0, sizeof(Allocation));
-    memset(TempAllocation, 0, sizeof(TempAllocation));
-    memset(Need, 0, sizeof(Need));
-    memset(TempNeed, 0, sizeof(TempNeed));
-    memset(Request, 0, sizeof(Request));
-
-    cout &lt;&lt; &quot;输入进程个数和资源个数：&quot; &lt;&lt; endl;
-    cin &gt;&gt; NumP &gt;&gt; NumR;
-    cout &lt;&lt; &quot;输入各进程最大资源需求(Max矩阵)：&quot; &lt;&lt; endl;
-    for (int i = 0; i &lt; NumP; i++) {
-        for (int j = 0; j &lt; NumR; j++) {
-            cin &gt;&gt; Max[i][j];
-        }
-    }
-    cout &lt;&lt; &quot;输入各进程已分配资源(Allocation矩阵)：&quot; &lt;&lt; endl;
-    for (int i = 0; i &lt; NumP; i++) {
-        for (int j = 0; j &lt; NumR; j++) {
-            cin &gt;&gt; Allocation[i][j];
-        }
-    }
-    cout &lt;&lt; &quot;输入可分配资源数(Available向量)：&quot; &lt;&lt; endl;
-    for (int j = 0; j &lt; NumR; j++) {
-        cin &gt;&gt; Available[j];
-    }
-    for (int i = 0; i &lt; NumP; i++) {
-        for (int j = 0; j &lt; NumR; j++) {
-            Need[i][j] = Max[i][j] - Allocation[i][j];
-        }
-    }
-}
-
-void bank(int pid, int request[R]) {
-    bool flag = true;
-    for (int j = 0; j &lt; NumR; j++) {
-        if (request[j] &gt; Need[pid][j] || request[j] &gt; Available[j]) {
-            cout &lt;&lt; &quot;请求资源数量超过进程需求量or系统可用资源数&quot; &lt;&lt; endl;
-            flag = false;
-        }
-    }
-    if (flag) {
-        //保存当前各矩阵的值
-        memcpy(TempAvailable, Available, sizeof(TempAvailable));
-        memcpy(TempAllocation, Allocation, sizeof(TempAllocation));
-        memcpy(TempNeed, Need, sizeof(TempNeed));
-
-        for (int j = 0; j &lt; NumR; j++) {
-            Available[j] -= request[j];
-            Allocation[pid][j] += request[j];
-            Need[pid][j] -= request[j];
-        }
-        check();
-    }
-    Sleep(1000);
-}
-
-void check() {
-    stack&lt;int&gt; stk;
-    safety = true;
-    int k = 0; //已成功处理的进程数
-    bool have; //记录某次遍历是否有入栈操作
-    bool found = false; //是否找到满足条件的进程
-    int XL[P] = { 0 }; int v = 0; //记录序列
-    int Work[P];
-    bool Finish[P];
-    // 初始化Work[]和Finish[]
-    memcpy(Work, Available, sizeof(Work));
-    for (int i = 0; i &lt; P; i++) {
-        Finish[i] = false;
-    }
-
-    do {
-        have = false;
-        for (int i = 0; i &lt; NumP; i++) {
-            if (!Finish[i]) {
-                found = true;
-                for (int j = 0; j &lt; NumR; j++) {
-                    if (Need[i][j] &gt; Work[j]) {
-                        found = false;
-                    }
-                }
-                if (found) {
-                    //入栈
-                    stk.push(i);
-                    have = true;
-                    found = false;
-                }
-            }
-        }
-        if (!have) {
-            if (k == 0) {
-                //从没有加入过
-                break;
-            }
-            //回退
-            v--;
-            int id = XL[v];
-            XL[v] = 0;
-            Finish[id] = false;
-            for (int j = 0; j &lt; NumR; j++) {
-                Work[j] -= Allocation[id][j];
-            }
-            k--;
-        }
-        if (!stk.empty()) {
-            int id = stk.top();
-            stk.pop();
-            Finish[id] = true;
-            for (int j = 0; j &lt; NumR; j++) {
-                Work[j] += Allocation[id][j];
-            }
-            k++;
-            XL[v++] = id;
-        }
-    } while (k &lt; NumP);
-
-    if (k == 0) {
-        safety = false;
-        cout &lt;&lt; &quot;系统处于不安全状态&quot; &lt;&lt; endl;
-    } else {
-        safety = true;
-        cout &lt;&lt; &quot;安全序列为：&quot;;
-        for (int i = 0; i &lt; NumP; i++) {
-            cout &lt;&lt; &quot;P&quot; &lt;&lt; XL[i] &lt;&lt; &quot;  &quot;;
-        }
-        cout &lt;&lt; endl;
-    }
-}
-
-void status() {
-    cout &lt;&lt; endl &lt;&lt; &quot;------------------------------------------------&quot; &lt;&lt; endl;
-    int i, j;
-    cout &lt;&lt; &quot;当前状态：&quot; &lt;&lt; endl;
-    cout &lt;&lt; &quot;PID    Max    Allocation    Need&quot; &lt;&lt; endl;
-    for (i = 0; i &lt; NumP; i++) {
-        cout &lt;&lt; i &lt;&lt; &quot;     &quot;;
-        for (j = 0; j &lt; NumR; j++) {
-            cout &lt;&lt; Max[i][j] &lt;&lt; &quot;  &quot;;
-        }
-        cout &lt;&lt; &quot;  |  &quot;;
-        for (j = 0; j &lt; NumR; j++) {
-            cout &lt;&lt; Allocation[i][j] &lt;&lt; &quot;  &quot;;
-        }
-        cout &lt;&lt; &quot;  |  &quot;;
-        for (j = 0; j &lt; NumR; j++) {
-            cout &lt;&lt; Need[i][j] &lt;&lt; &quot;  &quot;;
-        }
-        cout &lt;&lt; endl;
-    }
-    cout &lt;&lt; &quot;系统可用资源：&quot; &lt;&lt; endl;
-    for (j = 0; j &lt; NumR; j++) {
-        cout &lt;&lt; Available[j] &lt;&lt; &quot;  &quot;;
-    }
-    cout &lt;&lt; endl;
-    cout &lt;&lt; endl &lt;&lt; &quot;------------------------------------------------&quot; &lt;&lt; endl;
-}
-
-int main()
-{
-    init();
-    status();
-    int PID = -1;
-    while (true) {
-        cout &lt;&lt; &quot;请输入进程ID:&quot; &lt;&lt; endl;
-        cin &gt;&gt; PID;
-        if (PID &gt;= 0 &amp;&amp; PID &lt; NumP) {
-            cout &lt;&lt; &quot;请输入请求资源数:&quot; &lt;&lt; endl;
-            for (int j = 0; j &lt; NumR; j++) {
-                cin &gt;&gt; Request[j];
-            }
-            bank(PID, Request);
-            if (!safety) {
-                memcpy(Available, TempAvailable, sizeof(Available));
-                memcpy(Allocation, TempAllocation, sizeof(Allocation));
-                memcpy(Need, TempNeed, sizeof(Need));
-            }
-            status();
-        } else {
-            cout &lt;&lt; &quot;进程ID不合法&quot; &lt;&lt; endl;
-        }
-    }
-    return 0;
-}
-</code></pre><hr>
+<a id="more"></a>
+<h4 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">设进程P提出请求Request[i]，则银行家算法按如下规则进行判断。</span><br><span class="line">(1)如果Request[P][i] &lt;= Need[P][i]，则转（2)；否则，出错。</span><br><span class="line">(2)如果Request[P][i] &lt;= Available[i]，则转（3)；否则，等待。</span><br><span class="line">(3)系统试探分配资源，修改相关数据：</span><br><span class="line">    Available[i] -= Request[P][i];</span><br><span class="line">    Allocation[P][i] += Request[P][i];</span><br><span class="line">    Need[P][i] -= Request[P][i];</span><br><span class="line">(4)系统执行安全性检查，如安全，则分配成立；否则试探险性分配作废，系统恢复原状，进程等待。</span><br></pre></td></tr></table></figure>
+<h4 id="安全性检查"><a href="#安全性检查" class="headerlink" title="安全性检查"></a>安全性检查</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(1)设置两个工作向量 Work = Available; Finish = &#123;false...&#125;</span><br><span class="line">(2)从进程集合中找到一个满足下述条件的进程，</span><br><span class="line">    Finish == false;</span><br><span class="line">    Need &lt;= Work;</span><br><span class="line">    如找到，执行(3)；否则，执行(4)</span><br><span class="line">(3)设进程获得资源，可顺利执行，直至完成，从而释放资源。</span><br><span class="line">    Work = Work + Allocation;</span><br><span class="line">    Finish = true;</span><br><span class="line">    返回(2);</span><br><span class="line">(4)如所有的进程Finish = true，则表示安全；否则系统不安全。</span><br></pre></td></tr></table></figure>
+<p>结束条件合理性的证明：<a href="http://blog.csdn.net/trium_kw/article/details/51289610" target="_blank" rel="noopener">银行家算法结束条件的合理性证明</a>    !!未求证正确性!!</p>
+<h4 id="使用回溯的安全性检查"><a href="#使用回溯的安全性检查" class="headerlink" title="使用回溯的安全性检查"></a>使用回溯的安全性检查</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> P 100  <span class="comment">// 最大进程数</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> R 50   <span class="comment">// 最大资源类数</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> Available[R], Max[P][R], Allocation[P][R], Need[P][R], Request[R];</span><br><span class="line"><span class="keyword">int</span> TempAvailable[R], TempAllocation[P][R], TempNeed[P][R];</span><br><span class="line"><span class="keyword">int</span> NumP = <span class="number">0</span>, NumR = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">bool</span> safety; <span class="comment">//安全状态</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(Available, <span class="number">0</span>, <span class="keyword">sizeof</span>(Available));</span><br><span class="line">    <span class="built_in">memset</span>(TempAvailable, <span class="number">0</span>, <span class="keyword">sizeof</span>(TempAvailable));</span><br><span class="line">    <span class="built_in">memset</span>(Max, <span class="number">0</span>, <span class="keyword">sizeof</span>(Max));</span><br><span class="line">    <span class="built_in">memset</span>(Allocation, <span class="number">0</span>, <span class="keyword">sizeof</span>(Allocation));</span><br><span class="line">    <span class="built_in">memset</span>(TempAllocation, <span class="number">0</span>, <span class="keyword">sizeof</span>(TempAllocation));</span><br><span class="line">    <span class="built_in">memset</span>(Need, <span class="number">0</span>, <span class="keyword">sizeof</span>(Need));</span><br><span class="line">    <span class="built_in">memset</span>(TempNeed, <span class="number">0</span>, <span class="keyword">sizeof</span>(TempNeed));</span><br><span class="line">    <span class="built_in">memset</span>(Request, <span class="number">0</span>, <span class="keyword">sizeof</span>(Request));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"输入进程个数和资源个数："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; NumP &gt;&gt; NumR;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"输入各进程最大资源需求(Max矩阵)："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; NumP; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; Max[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"输入各进程已分配资源(Allocation矩阵)："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; NumP; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; Allocation[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"输入可分配资源数(Available向量)："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; Available[j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; NumP; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">            Need[i][j] = Max[i][j] - Allocation[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bank</span><span class="params">(<span class="keyword">int</span> pid, <span class="keyword">int</span> request[R])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (request[j] &gt; Need[pid][j] || request[j] &gt; Available[j]) &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"请求资源数量超过进程需求量or系统可用资源数"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            flag = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">        <span class="comment">//保存当前各矩阵的值</span></span><br><span class="line">        <span class="built_in">memcpy</span>(TempAvailable, Available, <span class="keyword">sizeof</span>(TempAvailable));</span><br><span class="line">        <span class="built_in">memcpy</span>(TempAllocation, Allocation, <span class="keyword">sizeof</span>(TempAllocation));</span><br><span class="line">        <span class="built_in">memcpy</span>(TempNeed, Need, <span class="keyword">sizeof</span>(TempNeed));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">            Available[j] -= request[j];</span><br><span class="line">            Allocation[pid][j] += request[j];</span><br><span class="line">            Need[pid][j] -= request[j];</span><br><span class="line">        &#125;</span><br><span class="line">        check();</span><br><span class="line">    &#125;</span><br><span class="line">    Sleep(<span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">    safety = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>; <span class="comment">//已成功处理的进程数</span></span><br><span class="line">    <span class="keyword">bool</span> have; <span class="comment">//记录某次遍历是否有入栈操作</span></span><br><span class="line">    <span class="keyword">bool</span> found = <span class="literal">false</span>; <span class="comment">//是否找到满足条件的进程</span></span><br><span class="line">    <span class="keyword">int</span> XL[P] = &#123; <span class="number">0</span> &#125;; <span class="keyword">int</span> v = <span class="number">0</span>; <span class="comment">//记录序列</span></span><br><span class="line">    <span class="keyword">int</span> Work[P];</span><br><span class="line">    <span class="keyword">bool</span> Finish[P];</span><br><span class="line">    <span class="comment">// 初始化Work[]和Finish[]</span></span><br><span class="line">    <span class="built_in">memcpy</span>(Work, Available, <span class="keyword">sizeof</span>(Work));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; P; i++) &#123;</span><br><span class="line">        Finish[i] = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        have = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; NumP; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!Finish[i]) &#123;</span><br><span class="line">                found = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (Need[i][j] &gt; Work[j]) &#123;</span><br><span class="line">                        found = <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (found) &#123;</span><br><span class="line">                    <span class="comment">//入栈</span></span><br><span class="line">                    stk.push(i);</span><br><span class="line">                    have = <span class="literal">true</span>;</span><br><span class="line">                    found = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!have) &#123;</span><br><span class="line">            <span class="keyword">if</span> (k == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">//从没有加入过</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//回退</span></span><br><span class="line">            v--;</span><br><span class="line">            <span class="keyword">int</span> id = XL[v];</span><br><span class="line">            XL[v] = <span class="number">0</span>;</span><br><span class="line">            Finish[id] = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">                Work[j] -= Allocation[id][j];</span><br><span class="line">            &#125;</span><br><span class="line">            k--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!stk.empty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> id = stk.top();</span><br><span class="line">            stk.pop();</span><br><span class="line">            Finish[id] = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">                Work[j] += Allocation[id][j];</span><br><span class="line">            &#125;</span><br><span class="line">            k++;</span><br><span class="line">            XL[v++] = id;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">while</span> (k &lt; NumP);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (k == <span class="number">0</span>) &#123;</span><br><span class="line">        safety = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"系统处于不安全状态"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        safety = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"安全序列为："</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; NumP; i++) &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"P"</span> &lt;&lt; XL[i] &lt;&lt; <span class="string">"  "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">status</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"------------------------------------------------"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"当前状态："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"PID    Max    Allocation    Need"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; NumP; i++) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">"     "</span>;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; Max[i][j] &lt;&lt; <span class="string">"  "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"  |  "</span>;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; Allocation[i][j] &lt;&lt; <span class="string">"  "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"  |  "</span>;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; Need[i][j] &lt;&lt; <span class="string">"  "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"系统可用资源："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; Available[j] &lt;&lt; <span class="string">"  "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"------------------------------------------------"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    status();</span><br><span class="line">    <span class="keyword">int</span> PID = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入进程ID:"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; PID;</span><br><span class="line">        <span class="keyword">if</span> (PID &gt;= <span class="number">0</span> &amp;&amp; PID &lt; NumP) &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"请输入请求资源数:"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; NumR; j++) &#123;</span><br><span class="line">                <span class="built_in">cin</span> &gt;&gt; Request[j];</span><br><span class="line">            &#125;</span><br><span class="line">            bank(PID, Request);</span><br><span class="line">            <span class="keyword">if</span> (!safety) &#123;</span><br><span class="line">                <span class="built_in">memcpy</span>(Available, TempAvailable, <span class="keyword">sizeof</span>(Available));</span><br><span class="line">                <span class="built_in">memcpy</span>(Allocation, TempAllocation, <span class="keyword">sizeof</span>(Allocation));</span><br><span class="line">                <span class="built_in">memcpy</span>(Need, TempNeed, <span class="keyword">sizeof</span>(Need));</span><br><span class="line">            &#125;</span><br><span class="line">            status();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"进程ID不合法"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
 
       
     </div>
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+            <a href="/tags/Operating-System/" rel="tag"># Operating System</a>
           
         </div>
       
@@ -601,8 +419,8 @@ int main()
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/22/Xposed-Developed/" rel="next" title="Xposed Developed">
-                <i class="fa fa-chevron-left"></i> Xposed Developed
+              <a href="/2016/11/22/Xposed-Developed/" rel="next" title="Xposed Framework">
+                <i class="fa fa-chevron-left"></i> Xposed Framework
               </a>
             
           </div>
@@ -622,6 +440,10 @@ int main()
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -635,11 +457,8 @@ int main()
           </div>
           
 
+  
 
-          
-  <div class="comments" id="comments">
-    
-  </div>
 
 
         </div>
@@ -662,66 +481,101 @@ int main()
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             Table of Contents
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             Overview
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400"
-               alt="MO Lulu" />
-          <p class="site-author-name" itemprop="name">MO Lulu</p>
-           
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="MO Lulu" />
+            
+              <p class="site-author-name" itemprop="name">MO Lulu</p>
               <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
+          </div>
 
           
-            <div class="site-state-item site-state-posts">
-              <a href="/archives/">
-                <span class="site-state-item-count">10</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/XF-zhjnc" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhjncxf@outlook.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
             </div>
           
 
           
+          
+
+          
+          
 
           
             
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
+          
           
 
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
         </div>
-
-        
-        
-
-        
-        
-
-        
-
-
       </section>
 
       
@@ -734,7 +588,7 @@ int main()
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现思路"><span class="nav-number">1.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需要定义的数据结构"><span class="nav-number">2.</span> <span class="nav-text">需要定义的数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#银行家算法"><span class="nav-number">3.</span> <span class="nav-text">银行家算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全性检查"><span class="nav-number">4.</span> <span class="nav-text">安全性检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用回溯的安全性检查"><span class="nav-number">5.</span> <span class="nav-text">使用回溯的安全性检查</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现思路"><span class="nav-number">1.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要定义的数据结构"><span class="nav-number">2.</span> <span class="nav-text">需要定义的数据结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#银行家算法"><span class="nav-number">3.</span> <span class="nav-text">银行家算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安全性检查"><span class="nav-number">4.</span> <span class="nav-text">安全性检查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用回溯的安全性检查"><span class="nav-number">5.</span> <span class="nav-text">使用回溯的安全性检查</span></a></li></ol></div>
             
 
           </div>
@@ -754,30 +608,43 @@ int main()
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-address-card-o"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">MO Lulu</span>
+
+  
+
+  
 </div>
 
 
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
 
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
 
         
+
+
+
+
+
+
+
 
         
       </div>
@@ -787,7 +654,11 @@ int main()
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
+    
+
     
 
   </div>
@@ -808,68 +679,72 @@ int main()
 
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
 
 
 
   
 
 
-  
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
 
+
+
+  
 
 
 
@@ -892,12 +767,25 @@ int main()
 
 
 
+
+
+
+
   
 
 
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
   
 
   

@@ -2,6 +2,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
 
@@ -9,7 +18,12 @@
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+
+
 
 
 
@@ -36,36 +50,11 @@
 
 
 
+
   
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
@@ -74,37 +63,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Android,Xposed," />
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
 
 
 
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
 
 
 
 
 
 
-<meta name="description" content="安装Xposed框架Android 4.X Android 4.0.3 - Android 4.4 需要root权限 下载 Xposed Installer 2.7 某些特殊的系统谨慎使用，如魅族小米华为，有相应的定制框架安装器">
-<meta name="keywords" content="Android,Xposed">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Xposed Developed">
-<meta property="og:url" content="http://yoursite.com/2016/11/22/Xposed-Developed/index.html">
-<meta property="og:site_name" content="XF-zhjnc.github.io">
-<meta property="og:description" content="安装Xposed框架Android 4.X Android 4.0.3 - Android 4.4 需要root权限 下载 Xposed Installer 2.7 某些特殊的系统谨慎使用，如魅族小米华为，有相应的定制框架安装器">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-07-27T13:42:29.556Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xposed Developed">
-<meta name="twitter:description" content="安装Xposed框架Android 4.X Android 4.0.3 - Android 4.4 需要root权限 下载 Xposed Installer 2.7 某些特殊的系统谨慎使用，如魅族小米华为，有相应的定制框架安装器">
+
+
 
 
 
@@ -113,13 +84,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -131,14 +102,40 @@
 </script>
 
 
-
-  <link rel="canonical" href="http://yoursite.com/2016/11/22/Xposed-Developed/"/>
-
+  
 
 
 
 
-  <title>Xposed Developed | XF-zhjnc.github.io</title>
+  <meta name="description" content="安装Xposed框架Android 4.X Android 4.0.3 - Android 4.4 需要root权限 下载 Xposed Installer 2.7 某些特殊的系统谨慎使用，如魅族小米华为，有相应的定制框架安装器">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xposed Framework">
+<meta property="og:url" content="https://XF-zhjnc.github.io/2016/11/22/Xposed-Developed/index.html">
+<meta property="og:site_name" content="XF-zhjnc.github.io">
+<meta property="og:description" content="安装Xposed框架Android 4.X Android 4.0.3 - Android 4.4 需要root权限 下载 Xposed Installer 2.7 某些特殊的系统谨慎使用，如魅族小米华为，有相应的定制框架安装器">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-07-31T03:30:08.398Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Xposed Framework">
+<meta name="twitter:description" content="安装Xposed框架Android 4.X Android 4.0.3 - Android 4.4 需要root权限 下载 Xposed Installer 2.7 某些特殊的系统谨慎使用，如魅族小米华为，有相应的定制框架安装器">
+
+
+
+
+
+
+  <link rel="canonical" href="https://XF-zhjnc.github.io/2016/11/22/Xposed-Developed/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Xposed Framework | XF-zhjnc.github.io</title>
   
 
 
@@ -149,10 +146,32 @@
 
 
 
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
 
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
 
-
-
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
 </head>
 
@@ -163,7 +182,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -172,19 +191,17 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">XF-zhjnc.github.io</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="Toggle navigation bar">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -192,55 +209,53 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            About
-          </a>
-        </li>
-      
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
 
       
+      
     </ul>
+  
+
+  
+    
+
   
 
   
@@ -248,12 +263,20 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
 
@@ -266,13 +289,19 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/22/Xposed-Developed/">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://XF-zhjnc.github.io/2016/11/22/Xposed-Developed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MO Lulu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -284,11 +313,19 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Xposed Developed</h1>
+          <h1 class="post-title" itemprop="name headline">Xposed Framework
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -296,11 +333,12 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-22T11:54:20+08:00">
-                2016-11-22
-              </time>
-            
 
+              
+                
+              
+
+              <time title="Created: 2016-11-22 00:00:00" itemprop="dateCreated datePublished" datetime="2016-11-22T00:00:00+08:00">2016-11-22</time>
             
 
             
@@ -325,186 +363,112 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <h2 id="安装Xposed框架"><a href="#安装Xposed框架" class="headerlink" title="安装Xposed框架"></a>安装Xposed框架</h2><h3 id="Android-4-X"><a href="#Android-4-X" class="headerlink" title="Android 4.X"></a>Android 4.X</h3><ol>
+        <h3 id="安装Xposed框架"><a href="#安装Xposed框架" class="headerlink" title="安装Xposed框架"></a>安装Xposed框架</h3><h4 id="Android-4-X"><a href="#Android-4-X" class="headerlink" title="Android 4.X"></a>Android 4.X</h4><ol>
 <li>Android 4.0.3 - Android 4.4</li>
 <li>需要root权限</li>
-<li>下载 <a href="http://repo.xposed.info/module/de.robv.android.xposed.installer" target="_blank" rel="external">Xposed Installer 2.7</a></li>
-<li>某些特殊的系统谨慎使用，如魅族小米华为，有相应的定制框架安装器<a id="more"></a>
-</li>
+<li>下载 <a href="http://repo.xposed.info/module/de.robv.android.xposed.installer" target="_blank" rel="noopener">Xposed Installer 2.7</a></li>
+<li>某些特殊的系统谨慎使用，如魅族小米华为，有相应的定制框架安装器</li>
 </ol>
-<h3 id="Android-5-0"><a href="#Android-5-0" class="headerlink" title="Android 5.0+"></a>Android 5.0+</h3><ol>
-<li>有root的手机：下载 <a href="http://forum.xda-developers.com/showthread.php?t=3034811" target="_blank" rel="external">Xposed Installer 3.x</a></li>
+<a id="more"></a>
+<h4 id="Android-5-0"><a href="#Android-5-0" class="headerlink" title="Android 5.0+"></a>Android 5.0+</h4><ol>
+<li>有root的手机：下载 <a href="http://forum.xda-developers.com/showthread.php?t=3034811" target="_blank" rel="noopener">Xposed Installer 3.x</a></li>
 <li>无root手机：<ol>
 <li>需要第三方recovery用于卡刷框架主体</li>
 <li>查看手机的CPU架构</li>
-<li>下载相应的框架 <a href="http://dl-xda.xposed.info/framework/" target="_blank" rel="external">framework</a></li>
+<li>下载相应的框架 <a href="http://dl-xda.xposed.info/framework/" target="_blank" rel="noopener">framework</a></li>
 <li>21，22，23分别对应安卓版本5.0，5.1，6.0；arm对应arm架构的32位cpu，arm64对应arm架构的64位cpu。x86对应x86架构的cpu。</li>
 <li>用第三方recovery卡刷框架</li>
-<li>下载 <a href="http://forum.xda-developers.com/showthread.php?t=3034811" target="_blank" rel="external">Xposed Installer 3.x</a></li>
+<li>下载 <a href="http://forum.xda-developers.com/showthread.php?t=3034811" target="_blank" rel="noopener">Xposed Installer 3.x</a></li>
 </ol>
 </li>
 </ol>
-<h3 id="为Genymotion模拟器安装"><a href="#为Genymotion模拟器安装" class="headerlink" title="为Genymotion模拟器安装"></a>为Genymotion模拟器安装</h3><ol>
+<h4 id="为Genymotion模拟器安装"><a href="#为Genymotion模拟器安装" class="headerlink" title="为Genymotion模拟器安装"></a>为Genymotion模拟器安装</h4><ol>
 <li>一个已经正常工作的Genymotion模拟器</li>
 <li>因为Xposed是arm架构下使用的，而Genymotion是x86架构的，所以需要让它支持arm架构的App</li>
 <li>刷入genymotion arm transltor：下载Genymotion-ARM-Translation_v1.1.zip，直接拖到模拟器中，确定刷入即可。刷入后重启模拟器</li>
-<li>刷入SuperSU：<a href="https://download.chainfire.eu/696/supersu/" target="_blank" rel="external">SuperSU v2.46(不能用新的版本)</a>， 重启模拟器</li>
+<li>刷入SuperSU：<a href="https://download.chainfire.eu/696/supersu/" target="_blank" rel="noopener">SuperSU v2.46(不能用新的版本)</a>， 重启模拟器</li>
 <li>安装谷歌全家桶(不知是否必须)：可以下载与系统对应的GApps包刷入，也可以在应用市场找个google安装器快捷安装</li>
 <li>安装与系统对应的Xposed Installer。</li>
 </ol>
-<h2 id="下载支持jar包"><a href="#下载支持jar包" class="headerlink" title="下载支持jar包"></a>下载支持jar包</h2><blockquote>
+<h3 id="Xposed-官方资源"><a href="#Xposed-官方资源" class="headerlink" title="Xposed 官方资源"></a>Xposed 官方资源</h3><blockquote>
 <p>If you want to support ROMs before Lollipop, you can only use API version 53, as the latest Xposed version for Android 4.x was 54. Note that the sources jar provided for this version doesn’t match the actual implementation, it only makes the documentation available.</p>
 </blockquote>
-<p>XposedBridgeApi-54.jar: <a href="http://forum.xda-developers.com/xposed/xposed-api-changelog-developer-news-t2714067" target="_blank" rel="external">xda-developers/sposed</a></p>
+<p>XposedBridgeApi-54.jar: <a href="http://forum.xda-developers.com/xposed/xposed-api-changelog-developer-news-t2714067" target="_blank" rel="noopener">xda-developers/sposed</a></p>
 <blockquote>
 <p>只想支持Lollipop及以上可以使用最新的jar</p>
 </blockquote>
-<p>当前最新：<a href="https://bintray.com/rovo89/de.robv.android.xposed/api/82" target="_blank" rel="external">api-82</a></p>
-<p>作者GitHub：<a href="https://github.com/rovo89?tab=repositories" target="_blank" rel="external">rovo89</a></p>
-<p>官方DEMO及教程：<a href="https://github.com/rovo89/XposedBridge/wiki/Development-tutorial" target="_blank" rel="external">开发教程</a> 、 <a href="https://github.com/rovo89/XposedBridge/wiki/Using-the-Xposed-Framework-API" target="_blank" rel="external">API使用须知</a></p>
-<h2 id="使用Android-Studio开发"><a href="#使用Android-Studio开发" class="headerlink" title="使用Android Studio开发"></a>使用Android Studio开发</h2><ol>
+<p>当前最新：<a href="https://bintray.com/rovo89/de.robv.android.xposed/api/82" target="_blank" rel="noopener">api-82</a></p>
+<p>作者GitHub：<a href="https://github.com/rovo89?tab=repositories" target="_blank" rel="noopener">rovo89</a></p>
+<p>官方DEMO及教程：<a href="https://github.com/rovo89/XposedBridge/wiki/Development-tutorial" target="_blank" rel="noopener">开发教程</a> 、 <a href="https://github.com/rovo89/XposedBridge/wiki/Using-the-Xposed-Framework-API" target="_blank" rel="noopener">API使用须知</a></p>
+<h3 id="使用Android-Studio开发"><a href="#使用Android-Studio开发" class="headerlink" title="使用Android Studio开发"></a>使用Android Studio开发</h3><ol>
 <li>新建工程，可以选择不创建Activity</li>
-<li><p>更改Module的build.gradle文件</p>
-<pre><code>compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])
-改为
-provided fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])
-</code></pre><ul>
-<li>此处不改会报错：<code>java.lang.IllegalAccessError: Class ref in pre-verified class resolved to unexpected implementation</code></li>
-</ul>
+<li><p>更改Module的build.gradle文件，添加依赖(并删除多余的依赖以减小体积)</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">    compileOnly <span class="string">'de.robv.android.xposed:api:82'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>切换工程视图为Project，在<code>app</code>目录下创建<code>lib</code>文件夹，将<code>XposedBridgeApi-54.jar</code>放进去，并右击该jar包 -&gt; <code>Add As Library</code></p>
-<blockquote>
-<p>在[API使用须知]中有更方便有效的引入方法<br><br>直接在<code>app/build.gradle</code>文件中添加以下代码</p>
-</blockquote>
-<pre><code>repositories {
-    jcenter();
-}
-
-dependencies {
-    provided &apos;de.robv.android.xposed:api:82&apos;
-}
-</code></pre></li>
 <li><p>在<code>AndroidManifest.xml</code>文件的<code>application</code>中添加如下代码，<code>xposedminversion</code>是此模块支持的最低版本号，前面下载的文件中的号码即为版本号.</p>
-<pre><code>&lt;application
-        ... &gt;
-
-    &lt;meta-data
-        android:name=&quot;xposedmodule&quot;
-        android:value=&quot;true&quot; /&gt;
-    &lt;meta-data
-        android:name=&quot;xposeddescription&quot;
-        android:value=&quot;软件介绍&quot; /&gt;
-    &lt;meta-data
-        android:name=&quot;xposedminversion&quot;
-        android:value=&quot;54&quot; /&gt;
-&lt;/application&gt;
-</code></pre></li>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag">        <span class="attr">...</span> &gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">"xposedmodule"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:value</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">"xposeddescription"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:value</span>=<span class="string">"软件介绍"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">"xposedminversion"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:value</span>=<span class="string">"54"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
 <li><p>新建一个java类，继承<code>IXposedHookLoadPackage</code>，重写<code>handleLoadPackage</code>方法。任何应用在启动时都会回调<code>handleLoadPackage</code>方法</p>
-<pre><code>package com.kid.xposed.Hook;
-
-import de.robv.android.xposed.IXposedHookLoadPackage;
-import de.robv.android.xposed.callbacks.XC_LoadPackage;
-
-public class MainClass implements IXposedHookLoadPackage {
-    @Override
-    public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable {
-        //TODO
-    }
-}
-</code></pre></li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kid.xposed.Hook;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> de.robv.android.xposed.IXposedHookLoadPackage;</span><br><span class="line"><span class="keyword">import</span> de.robv.android.xposed.callbacks.XC_LoadPackage;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainClass</span> <span class="keyword">implements</span> <span class="title">IXposedHookLoadPackage</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleLoadPackage</span><span class="params">(XC_LoadPackage.LoadPackageParam loadPackageParam)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="comment">//TODO</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>指定模块入口：在<code>src/main</code>下创建<code>assets</code>文件夹，新建一个文件<code>xposed_init</code>，写入刚才创建的类的完整类名</p>
-<pre><code>com.kid.xposed.Hook.MainClass
-</code></pre></li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">com.kid.xposed.Hook.MainClass</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>编译安装测试是否正常工作</p>
 <ul>
-<li><p>为了能看到效果，可以在<code>handleLoadPackage</code>方法中使用<code>XposedBridge</code>提供的Log工具</p>
-<pre><code>//TODO
-XposedBridge.log(&quot;loaded: &quot; + loadPackageParam.packageName);
-</code></pre></li>
+<li>为了能看到效果，可以在<code>handleLoadPackage</code>方法中使用<code>XposedBridge</code>提供的Log工具  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//TODO</span></span><br><span class="line">XposedBridge.log(<span class="string">"loaded: "</span> + loadPackageParam.packageName);</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 <li><p>一般情况下模块只针对某一特定应用，在<code>handleLoadPackage</code>方法中添加包名过滤。并使用<code>XposedHelpers</code>类中的<code>findAndHookMethod</code>方法实现功能</p>
 <ol>
-<li><p>手动 <code>import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;</code></p>
-<pre><code>@Override
-public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable {
-    // 判断包名，过滤出目标程序
-    if (!loadPackageParam.packageName.equals(&quot;com.kid.kcbtest&quot;))
-        return;
-
-    /** 
-     * Xposed提供的Hook方法 
-     * @param className 待Hook的Class 
-     * @param classLoader classLoader 
-     * @param methodName 待Hook的Method 
-     * @param parameterTypesAndCallback hook回调
-     * findAndHookMethod(String className, ClassLoader classLoader, String methodName, Object... parameterTypesAndCallback);
-     */
-    示例：
-    findAndHookMethod(&quot;com.kid.kcbtest.Course&quot;, loadPackageParam.classLoader, &quot;getName&quot;, new XC_MethodHook() {
-        //以下两个方法的任一个，如果不做操作，可以不用重写
-        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-            super.beforeHookedMethod(param);
-        }
-        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-            String ts = (String) param.getResult();
-            XposedBridge.log(ts);
-            param.setResult(&quot;Hello&quot;);
-        }
-    });
-}
-</code></pre></li>
+<li>手动 <code>import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;</code> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleLoadPackage</span><span class="params">(XC_LoadPackage.LoadPackageParam loadPackageParam)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">    <span class="comment">// 判断包名，过滤出目标程序</span></span><br><span class="line">    <span class="keyword">if</span> (!loadPackageParam.packageName.equals(<span class="string">"com.kid.kcbtest"</span>))</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** </span></span><br><span class="line"><span class="comment">     * Xposed提供的Hook方法 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> className 待Hook的Class </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> classLoader classLoader </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> methodName 待Hook的Method </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> parameterTypesAndCallback hook回调</span></span><br><span class="line"><span class="comment">     * findAndHookMethod(String className, ClassLoader classLoader, String methodName, Object... parameterTypesAndCallback);</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    示例：</span><br><span class="line">    findAndHookMethod(<span class="string">"com.kid.kcbtest.Course"</span>, loadPackageParam.classLoader, <span class="string">"getName"</span>, <span class="keyword">new</span> XC_MethodHook() &#123;</span><br><span class="line">        <span class="comment">//以下两个方法的任一个，如果不做操作，可以不用重写</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">beforeHookedMethod</span><span class="params">(MethodHookParam param)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>.beforeHookedMethod(param);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">afterHookedMethod</span><span class="params">(MethodHookParam param)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">            String ts = (String) param.getResult();</span><br><span class="line">            XposedBridge.log(ts);</span><br><span class="line">            param.setResult(<span class="string">"Hello"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 </li>
-<li>(8)中创建了<code>XC_MethodHook</code>类的实例并重写了<code>afterHookedMethod</code>方法，该方法在被hook方法(上例中的getName)之后调用。如果不想让被hook方法执行，可以使用<code>XC_MethodReplacement</code>类并重写它的<code>replaceHookedMethod</code>方法。更多类及使用:<a href="http://api.xposed.info/reference/packages.html" target="_blank" rel="external">Xposed Framework API</a></li>
+<li><p>(7)中创建了<code>XC_MethodHook</code>类的实例并重写了<code>afterHookedMethod</code>方法，该方法在被hook方法(上例中的getName)之后调用。如果不想让被hook方法执行，可以使用<code>XC_MethodReplacement</code>类并重写它的<code>replaceHookedMethod</code>方法。更多类及使用:<a href="http://api.xposed.info/reference/packages.html" target="_blank" rel="noopener">Xposed Framework API</a></p>
+</li>
 <li><p>hook内部类(匿名内部类)中的方法：使用 $ 符号</p>
-<pre><code>findAndHookMethod(&quot;com.kid.kcbtest.Course$Inner&quot;, loadPackageParam.classLoader, &quot;methodName&quot;, new XC_MethodHook() {
-    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-        String ts = (String) param.getResult();
-        XposedBridge.log(ts);
-        param.setResult(&quot;Hello&quot;);
-    }
-});
-</code></pre></li>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">findAndHookMethod(<span class="string">"com.kid.kcbtest.Course$Inner"</span>, loadPackageParam.classLoader, <span class="string">"methodName"</span>, <span class="keyword">new</span> XC_MethodHook() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">afterHookedMethod</span><span class="params">(MethodHookParam param)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        String ts = (String) param.getResult();</span><br><span class="line">        XposedBridge.log(ts);</span><br><span class="line">        param.setResult(<span class="string">"Hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p> 找内部类的名字需要反编译后查阅smali代码，如果分classes，找对应的smali_classes</p>
+</li>
+<li><p>通过控件ID定位代码技巧</p>
+<ol>
+<li>用Layout分析工具得到控件混淆后的ID，如<code>a0m</code></li>
+<li>反编译apk后，在 <code>res\values\public.xml</code> 中查找 <code>type=&quot;id&quot;, name=&quot;a0m&quot;</code> 的16进制id值，用计算器转换为10进制后，在jadx中查找该10进制的id值</li>
 </ol>
-<h3 id="To-be-continued…"><a href="#To-be-continued…" class="headerlink" title="To be continued…"></a>To be continued…</h3>
+</li>
+</ol>
+<h4 id="To-be-continued…"><a href="#To-be-continued…" class="headerlink" title="To be continued…"></a>To be continued…</h4>
       
     </div>
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
             <a href="/tags/Android/" rel="tag"># Android</a>
-          
-            <a href="/tags/Xposed/" rel="tag"># Xposed</a>
           
         </div>
       
@@ -534,6 +498,10 @@ public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) 
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -547,11 +515,8 @@ public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) 
           </div>
           
 
+  
 
-          
-  <div class="comments" id="comments">
-    
-  </div>
 
 
         </div>
@@ -574,66 +539,101 @@ public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) 
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             Table of Contents
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             Overview
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400"
-               alt="MO Lulu" />
-          <p class="site-author-name" itemprop="name">MO Lulu</p>
-           
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="MO Lulu" />
+            
+              <p class="site-author-name" itemprop="name">MO Lulu</p>
               <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
+          </div>
 
           
-            <div class="site-state-item site-state-posts">
-              <a href="/archives/">
-                <span class="site-state-item-count">10</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/XF-zhjnc" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhjncxf@outlook.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
             </div>
           
 
           
+          
+
+          
+          
 
           
             
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
+          
           
 
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
         </div>
-
-        
-        
-
-        
-        
-
-        
-
-
       </section>
 
       
@@ -646,7 +646,7 @@ public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Xposed框架"><span class="nav-number">1.</span> <span class="nav-text">安装Xposed框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-4-X"><span class="nav-number">1.1.</span> <span class="nav-text">Android 4.X</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-5-0"><span class="nav-number">1.2.</span> <span class="nav-text">Android 5.0+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为Genymotion模拟器安装"><span class="nav-number">1.3.</span> <span class="nav-text">为Genymotion模拟器安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载支持jar包"><span class="nav-number">2.</span> <span class="nav-text">下载支持jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Android-Studio开发"><span class="nav-number">3.</span> <span class="nav-text">使用Android Studio开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#To-be-continued…"><span class="nav-number">3.1.</span> <span class="nav-text">To be continued…</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Xposed框架"><span class="nav-number">1.</span> <span class="nav-text">安装Xposed框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Android-4-X"><span class="nav-number">1.1.</span> <span class="nav-text">Android 4.X</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android-5-0"><span class="nav-number">1.2.</span> <span class="nav-text">Android 5.0+</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为Genymotion模拟器安装"><span class="nav-number">1.3.</span> <span class="nav-text">为Genymotion模拟器安装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xposed-官方资源"><span class="nav-number">2.</span> <span class="nav-text">Xposed 官方资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Android-Studio开发"><span class="nav-number">3.</span> <span class="nav-text">使用Android Studio开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#To-be-continued…"><span class="nav-number">3.1.</span> <span class="nav-text">To be continued…</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -666,30 +666,43 @@ public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) 
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-address-card-o"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">MO Lulu</span>
+
+  
+
+  
 </div>
 
 
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
 
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
 
         
+
+
+
+
+
+
+
 
         
       </div>
@@ -699,7 +712,11 @@ public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) 
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
+    
+
     
 
   </div>
@@ -720,68 +737,72 @@ public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) 
 
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
 
 
 
   
 
 
-  
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
 
+
+
+  
 
 
 
@@ -804,12 +825,25 @@ public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) 
 
 
 
+
+
+
+
   
 
 
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
   
 
   

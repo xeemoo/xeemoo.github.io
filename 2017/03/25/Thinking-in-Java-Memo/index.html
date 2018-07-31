@@ -2,6 +2,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
 
@@ -9,7 +18,12 @@
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+
+
 
 
 
@@ -36,36 +50,11 @@
 
 
 
+
   
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
@@ -74,37 +63,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Java," />
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
 
 
 
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
 
 
 
 
 
 
-<meta name="description" content="关系运算 测试对象的等价性： ==(!=)比较的是两个对象的引用，不管对象的内容。 equals()可以比较两个对象的内容。很多类都重写了Object的equals()方法，对于自定义的类，需重写equals()和hashCode()，否则默认的equals()是用==实现的[参见Object类源码]。   看代码要注意&amp;amp;&amp;amp;的短路性质  类型转换 char, byte, short">
-<meta name="keywords" content="Java">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Thinking in Java Memo">
-<meta property="og:url" content="http://yoursite.com/2017/03/25/Thinking-in-Java-Memo/index.html">
-<meta property="og:site_name" content="XF-zhjnc.github.io">
-<meta property="og:description" content="关系运算 测试对象的等价性： ==(!=)比较的是两个对象的引用，不管对象的内容。 equals()可以比较两个对象的内容。很多类都重写了Object的equals()方法，对于自定义的类，需重写equals()和hashCode()，否则默认的equals()是用==实现的[参见Object类源码]。   看代码要注意&amp;amp;&amp;amp;的短路性质  类型转换 char, byte, short">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-07-27T13:40:23.834Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Thinking in Java Memo">
-<meta name="twitter:description" content="关系运算 测试对象的等价性： ==(!=)比较的是两个对象的引用，不管对象的内容。 equals()可以比较两个对象的内容。很多类都重写了Object的equals()方法，对于自定义的类，需重写equals()和hashCode()，否则默认的equals()是用==实现的[参见Object类源码]。   看代码要注意&amp;amp;&amp;amp;的短路性质  类型转换 char, byte, short">
+
+
 
 
 
@@ -113,13 +84,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -131,14 +102,40 @@
 </script>
 
 
-
-  <link rel="canonical" href="http://yoursite.com/2017/03/25/Thinking-in-Java-Memo/"/>
-
+  
 
 
 
 
-  <title>Thinking in Java Memo | XF-zhjnc.github.io</title>
+  <meta name="description" content="关系运算 测试对象的等价性： ==(!=)比较的是两个对象的引用，不管对象的内容。 equals()可以比较两个对象的内容。很多类都重写了Object的equals()方法，对于自定义的类，需重写equals()和hashCode()，否则默认的equals()是用==实现的[参见Object类源码]。   看代码要注意&amp;amp;&amp;amp;的短路性质">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Thinking-in-Java-Memo">
+<meta property="og:url" content="https://XF-zhjnc.github.io/2017/03/25/Thinking-in-Java-Memo/index.html">
+<meta property="og:site_name" content="XF-zhjnc.github.io">
+<meta property="og:description" content="关系运算 测试对象的等价性： ==(!=)比较的是两个对象的引用，不管对象的内容。 equals()可以比较两个对象的内容。很多类都重写了Object的equals()方法，对于自定义的类，需重写equals()和hashCode()，否则默认的equals()是用==实现的[参见Object类源码]。   看代码要注意&amp;amp;&amp;amp;的短路性质">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-07-31T02:33:35.065Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Thinking-in-Java-Memo">
+<meta name="twitter:description" content="关系运算 测试对象的等价性： ==(!=)比较的是两个对象的引用，不管对象的内容。 equals()可以比较两个对象的内容。很多类都重写了Object的equals()方法，对于自定义的类，需重写equals()和hashCode()，否则默认的equals()是用==实现的[参见Object类源码]。   看代码要注意&amp;amp;&amp;amp;的短路性质">
+
+
+
+
+
+
+  <link rel="canonical" href="https://XF-zhjnc.github.io/2017/03/25/Thinking-in-Java-Memo/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Thinking-in-Java-Memo | XF-zhjnc.github.io</title>
   
 
 
@@ -149,10 +146,32 @@
 
 
 
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
 
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
 
-
-
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
 </head>
 
@@ -163,7 +182,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -172,19 +191,17 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">XF-zhjnc.github.io</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="Toggle navigation bar">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -192,55 +209,53 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            About
-          </a>
-        </li>
-      
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
 
       
+      
     </ul>
+  
+
+  
+    
+
   
 
   
@@ -248,12 +263,20 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
 
@@ -266,13 +289,19 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/25/Thinking-in-Java-Memo/">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://XF-zhjnc.github.io/2017/03/25/Thinking-in-Java-Memo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MO Lulu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -284,11 +313,19 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Thinking in Java Memo</h1>
+          <h1 class="post-title" itemprop="name headline">Thinking-in-Java-Memo
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -296,11 +333,12 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-25T09:09:35+08:00">
-                2017-03-25
-              </time>
-            
 
+              
+                
+              
+
+              <time title="Created: 2017-03-25 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-25T00:00:00+08:00">2017-03-25</time>
             
 
             
@@ -325,6 +363,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -339,10 +380,10 @@
 </li>
 <li>看代码要注意<code>&amp;&amp;</code>的短路性质</li>
 </ol>
+<a id="more"></a>
 <h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><ol>
 <li><code>char</code>, <code>byte</code>, <code>short</code>进行任意算术运算会自动转为<code>int</code>。</li>
-<li>Java没有C++的sizeof()方法，因为Java数据类型大小与平台无关。<a id="more"></a>
-</li>
+<li>Java没有C++的sizeof()方法，因为Java数据类型大小与平台无关。</li>
 </ol>
 <h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><ol>
 <li>在一个方法内使用<code>this</code>，表示“调用此方法的那个对象”的引用，在内部类中要格外注意分清。<code>this</code>用于构造方法的相互调用时，调用语句要放在最开始处[这是编译时错误，不算坑]</li>
@@ -363,10 +404,10 @@
 </ol>
 <h3 id="可变参数列表"><a href="#可变参数列表" class="headerlink" title="可变参数列表"></a>可变参数列表</h3><ol>
 <li><p>格式</p>
-<pre><code>void fuck(int i, String... s){}
-s是一个String[]引用。
-</code></pre></li>
-<li>会给重载带来点麻烦，少用。</li>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fuck</span><span class="params">(<span class="keyword">int</span> i, String... s)</span></span>&#123;&#125;</span><br><span class="line">s是一个String[]引用。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>会给重载带来点麻烦，少用。</p>
+</li>
 </ol>
 <h3 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h3><ol>
 <li>相同包下的其他类是可以访问本类的protected的成员的。</li>
@@ -400,78 +441,44 @@ s是一个String[]引用。
 <li>String类被声明为final，所以String类中的许多方法都是创建了一个新的String对象，原来的String没有被改变</li>
 <li>String类重载了’+’, ‘+=’运算符，在进行这些运算时，编译器自动引入StringBuilder类进行运算，并在最后使用toString()生成结果。</li>
 <li>JVM不能保证StringBuilder的操作是安全的，虽然它速度最快，但是可以保证StringBuffer是可以正确操作的，多线程情况下应选择使用StringBuffer。</li>
-<li><p>一个 java.io.InputStream 对象转String:</p>
-<pre><code>Scanner s = new Scanner(inputStream).useDelimiter(&quot;\\A&quot;);
-String res = s.hasNext() ? s.next() : &quot;&quot;;
-</code></pre></li>
+<li>一个 java.io.InputStream 对象转String: <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Scanner s = <span class="keyword">new</span> Scanner(inputStream).useDelimiter(<span class="string">"\\A"</span>);</span><br><span class="line">String res = s.hasNext() ? s.next() : <span class="string">""</span>;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 <h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><blockquote>
 <p>java.lang.Class</p>
 </blockquote>
 <ol>
 <li><p>Class类的实例表示正在运行的程序中的类和接口，获取方法：</p>
-<pre><code>Class&lt;?&gt; clazz = Class.forName(&quot;完整的类名&quot;);
-Class&lt;?&gt; clazz = new Fuck().getClass();
-Class&lt;?&gt; clazz = Fuck.class;   //不会自动初始化
-</code></pre></li>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; clazz = Class.forName(<span class="string">"完整的类名"</span>);</span><br><span class="line">Class&lt;?&gt; clazz = <span class="keyword">new</span> Fuck().getClass();</span><br><span class="line">Class&lt;?&gt; clazz = Fuck.class;   <span class="comment">//不会自动初始化</span></span><br></pre></td></tr></table></figure>
+</li>
 <li><p>常用方法：</p>
-<pre><code>Class&lt;?&gt; p = clazz.getSupperclass();
-Class&lt;?&gt; i[] = clazz.getInterfaces();
-Fuck f = (Fuck) clazz.newInstance();
-ClassLoader cl = clazz.getClassLoader();
-...
-</code></pre></li>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; p = clazz.getSupperclass();</span><br><span class="line">Class&lt;?&gt; i[] = clazz.getInterfaces();</span><br><span class="line">Fuck f = (Fuck) clazz.newInstance();</span><br><span class="line">ClassLoader cl = clazz.getClassLoader();</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>取得某个类的全部构造方法：</p>
-<pre><code>Constructor&lt;?&gt; cons[] = clazz.getConstructors();
-for(i=0, i&lt;cons.length(), i++){
-    Clazz&lt;?&gt; types[] = cons[i].getParameterTypes();
-    for(j=0, j&lt;types.length(), j++)
-        types[j].getName()
-}
-</code></pre></li>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Constructor&lt;?&gt; cons[] = clazz.getConstructors();</span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>, i&lt;cons.length(), i++)&#123;</span><br><span class="line">    Clazz&lt;?&gt; types[] = cons[i].getParameterTypes();</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">0</span>, j&lt;types.length(), j++)</span><br><span class="line">        types[j].getName()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>取得某个类的全部属性：Field类</p>
-<pre><code>Field[] field = clazz.getDeclaredFields();
-
-//属性的权限
-Modifier.toString(field[i].getModifiers());
-//属性的类型
-Class&lt;?&gt; type = field[i].getType();
-type.getName();
-</code></pre></li>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Field[] field = clazz.getDeclaredFields();</span><br><span class="line"></span><br><span class="line"><span class="comment">//属性的权限</span></span><br><span class="line">Modifier.toString(field[i].getModifiers());</span><br><span class="line"><span class="comment">//属性的类型</span></span><br><span class="line">Class&lt;?&gt; type = field[i].getType();</span><br><span class="line">type.getName();</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>取得某个类的全部方法：Method类</p>
-<pre><code>Method method[] = clazz.getMethods();
-//方法的权限
-Modifier.toString(method[i].getModifiers());
-//方法返回值类型
-method[i].getReturnType().getName();
-//方法名
-method[i].getName();
-</code></pre></li>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Method method[] = clazz.getMethods();</span><br><span class="line"><span class="comment">//方法的权限</span></span><br><span class="line">Modifier.toString(method[i].getModifiers());</span><br><span class="line"><span class="comment">//方法返回值类型</span></span><br><span class="line">method[i].getReturnType().getName();</span><br><span class="line"><span class="comment">//方法名</span></span><br><span class="line">method[i].getName();</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 
       
     </div>
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -511,6 +518,10 @@ method[i].getName();
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -524,11 +535,8 @@ method[i].getName();
           </div>
           
 
+  
 
-          
-  <div class="comments" id="comments">
-    
-  </div>
 
 
         </div>
@@ -551,66 +559,101 @@ method[i].getName();
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             Table of Contents
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             Overview
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://avatars0.githubusercontent.com/u/17158916?v=4&s=400"
-               alt="MO Lulu" />
-          <p class="site-author-name" itemprop="name">MO Lulu</p>
-           
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="MO Lulu" />
+            
+              <p class="site-author-name" itemprop="name">MO Lulu</p>
               <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
+          </div>
 
           
-            <div class="site-state-item site-state-posts">
-              <a href="/archives/">
-                <span class="site-state-item-count">10</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/XF-zhjnc" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhjncxf@outlook.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
             </div>
           
 
           
+          
+
+          
+          
 
           
             
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
+          
           
 
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
         </div>
-
-        
-        
-
-        
-        
-
-        
-
-
       </section>
 
       
@@ -643,30 +686,43 @@ method[i].getName();
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-address-card-o"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">MO Lulu</span>
+
+  
+
+  
 </div>
 
 
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
 
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
 
         
+
+
+
+
+
+
+
 
         
       </div>
@@ -676,7 +732,11 @@ method[i].getName();
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
+    
+
     
 
   </div>
@@ -697,68 +757,72 @@ method[i].getName();
 
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
 
 
 
   
 
 
-  
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
 
+
+
+  
 
 
 
@@ -781,12 +845,25 @@ method[i].getName();
 
 
 
+
+
+
+
   
 
 
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
   
 
   
