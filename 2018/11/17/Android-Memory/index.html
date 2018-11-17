@@ -107,20 +107,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="XF-zhjnc.github.io">
-<meta property="og:url" content="https://XF-zhjnc.github.io/archives/index.html">
+  <meta name="description" content="内存泄漏产生原因短生命周期对象因被长生命周期对象持有，导致短生命周期对象无法被垃圾回收销毁。内存泄漏是不恰当的引用没有及时断开，导致对内存的浪费，并可能产生OOM。">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 内存泄漏场景记录">
+<meta property="og:url" content="https://XF-zhjnc.github.io/2018/11/17/Android-Memory/index.html">
 <meta property="og:site_name" content="XF-zhjnc.github.io">
+<meta property="og:description" content="内存泄漏产生原因短生命周期对象因被长生命周期对象持有，导致短生命周期对象无法被垃圾回收销毁。内存泄漏是不恰当的引用没有及时断开，导致对内存的浪费，并可能产生OOM。">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-11-17T13:44:20.438Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="XF-zhjnc.github.io">
+<meta name="twitter:title" content="Android 内存泄漏场景记录">
+<meta name="twitter:description" content="内存泄漏产生原因短生命周期对象因被长生命周期对象持有，导致短生命周期对象无法被垃圾回收销毁。内存泄漏是不恰当的引用没有及时断开，导致对内存的浪费，并可能产生OOM。">
 
 
 
 
 
 
-  <link rel="canonical" href="https://XF-zhjnc.github.io/archives/"/>
+  <link rel="canonical" href="https://XF-zhjnc.github.io/2018/11/17/Android-Memory/"/>
 
 
 
@@ -130,7 +135,7 @@
   };
 </script>
 
-  <title>Archive | XF-zhjnc.github.io</title>
+  <title>Android 内存泄漏场景记录 | XF-zhjnc.github.io</title>
   
 
 
@@ -177,7 +182,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -230,7 +235,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
   </li>
@@ -250,25 +255,6 @@
 
   
     
-
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
 
   
 
@@ -294,422 +280,174 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://XF-zhjnc.github.io/2018/11/17/Android-Memory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MO Lulu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XF-zhjnc.github.io">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Android 内存泄漏场景记录
+              
+            
+          </h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-11-17 00:00:00" itemprop="dateCreated datePublished" datetime="2018-11-17T00:00:00+08:00">2018-11-17</time>
+            
+
+            
+          </span>
+
           
-        
-        Um..! 18 posts in total. Keep on posting.
-      </span>
-      
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/17/Android-Memory/" itemprop="url">
-              
-                <span itemprop="name">Android 内存泄漏场景记录</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-11-17T00:00:00+08:00"
-              content="2018-11-17" >
-          11-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/10/14/ThreadLocal/" itemprop="url">
-              
-                <span itemprop="name">Java ThreadLocal解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-10-14T00:00:00+08:00"
-              content="2018-10-14" >
-          10-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/10/13/Android-Custom-View/" itemprop="url">
-              
-                <span itemprop="name">Android 自定义 View</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-10-13T00:00:00+08:00"
-              content="2018-10-13" >
-          10-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/10/08/Wireshark-Filter/" itemprop="url">
-              
-                <span itemprop="name">Wireshark过滤器</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-10-08T00:00:00+08:00"
-              content="2018-10-08" >
-          10-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/31/Hexo/" itemprop="url">
-              
-                <span itemprop="name">Hexo从再次丢失到再次重建</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-31T00:00:00+08:00"
-              content="2018-07-31" >
-          07-31
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/03/Install-MySQL/" itemprop="url">
-              
-                <span itemprop="name">Install MySQL</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-03T00:00:00+08:00"
-              content="2018-07-03" >
-          07-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/31/Merge-specific-files-from-another-branch/" itemprop="url">
-              
-                <span itemprop="name">“合并”另一分支的部分文件</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-31T00:00:00+08:00"
-              content="2018-05-31" >
-          05-31
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/22/Download-Oracle-JDK/" itemprop="url">
-              
-                <span itemprop="name">wget 下载Oracle JDK</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-22T00:00:00+08:00"
-              content="2018-02-22" >
-          02-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
+            
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/24/Android-Doze/" itemprop="url">
-              
-                <span itemprop="name">Android Doze</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-24T00:00:00+08:00"
-              content="2017-07-24" >
-          07-24
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/18/Study-RxJava/" itemprop="url">
-              
-                <span itemprop="name">Study RxJava</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-18T00:00:00+08:00"
-              content="2017-07-18" >
-          07-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
+      
+        <h3 id="内存泄漏产生原因"><a href="#内存泄漏产生原因" class="headerlink" title="内存泄漏产生原因"></a>内存泄漏产生原因</h3><p>短生命周期对象因被长生命周期对象持有，导致短生命周期对象无法被垃圾回收销毁。内存泄漏是不恰当的引用没有及时断开，导致对内存的浪费，并可能产生OOM。</p>
+<a id="more"></a>
+<h3 id="Android-开发常见场景"><a href="#Android-开发常见场景" class="headerlink" title="Android 开发常见场景"></a>Android 开发常见场景</h3><h4 id="应用开发相关资源"><a href="#应用开发相关资源" class="headerlink" title="应用开发相关资源"></a>应用开发相关资源</h4><p>File、Bitmap、Java io相关、Cursor、Android动画等，需要在生命周期结束时关闭，动画不用时立即关闭。<br><strong>对于关闭资源的写法，不要使用finally地狱式嵌套，应该使用<code>try-with-resource</code>语法糖</strong>。</p>
+<h4 id="单例"><a href="#单例" class="headerlink" title="单例"></a>单例</h4><p>单例对象的静态特性使得单例对象的生命周期从创建时起一直到App销毁都存在，被单例对象持有的对象也就特别容易引发内存泄漏。<br>常见的情况是让单例持有了一个Activity或者Service等Context对象，使得Activity或者Service已经不再使用时不能被正常回收。解决方法是使用ApplicationContext或者不要持有Context。</p>
+<h4 id="非静态内部类持有外部类引用"><a href="#非静态内部类持有外部类引用" class="headerlink" title="非静态内部类持有外部类引用"></a>非静态内部类持有外部类引用</h4><p>非静态内部类会持有外部类的引用，若实例化了一个静态的对象，那么与单例一样，实例的生命周期大于持有对象的外部类，导致产生内存泄漏。<br>可以将非静态内部类改为静态内部类。<br>常见的情况是在Activity中定义Handler内部类。关于定义Handler内部类，需要注意的几点有：声明为静态内部类，传入的Activity引用使用WeakReference包装，另外，Looper线程的消息队列也需要在Activity销毁时移除相关的消息。</p>
+<h4 id="WebView"><a href="#WebView" class="headerlink" title="WebView"></a>WebView</h4><p>当WebView是在xml中定义的，Activity销毁时调用destroy可能还会引发内存泄漏。改成在Java中动态添加，并使用ApplicationContext可以避免整个内存泄漏。</p>
+
+      
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/14/ThreadLocal/" rel="next" title="Java ThreadLocal解析">
+                <i class="fa fa-chevron-left"></i> Java ThreadLocal解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -730,8 +468,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -821,6 +568,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存泄漏产生原因"><span class="nav-number">1.</span> <span class="nav-text">内存泄漏产生原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-开发常见场景"><span class="nav-number">2.</span> <span class="nav-text">Android 开发常见场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用开发相关资源"><span class="nav-number">2.1.</span> <span class="nav-text">应用开发相关资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单例"><span class="nav-number">2.2.</span> <span class="nav-text">单例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非静态内部类持有外部类引用"><span class="nav-number">2.3.</span> <span class="nav-text">非静态内部类持有外部类引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebView"><span class="nav-number">2.4.</span> <span class="nav-text">WebView</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -959,6 +722,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
 
   
 
