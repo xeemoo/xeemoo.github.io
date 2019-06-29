@@ -107,25 +107,25 @@
 
 
 
-  <meta name="description" content="Doze 模式Doze 模式的进入条件 屏幕关闭(必须) 未插电源 处于处于静止状态一段时间">
-<meta name="keywords" content="Android">
+  <meta name="description" content="上一篇：ThreadLocal 解析 对象存在哪里ThreadLocal对象是被创建它的对象持有的，ThreadLocal存储的数据分别是各个线程实例持有的，它们都存在堆上。">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android Doze">
-<meta property="og:url" content="https://XF-zhjnc.github.io/2017/07/24/Android-Doze/index.html">
+<meta property="og:title" content="Java ThreadLocal细节记录">
+<meta property="og:url" content="https://XF-zhjnc.github.io/2019/06/29/ThreadLocal-Problems/index.html">
 <meta property="og:site_name" content="XF-zhjnc.github.io">
-<meta property="og:description" content="Doze 模式Doze 模式的进入条件 屏幕关闭(必须) 未插电源 处于处于静止状态一段时间">
+<meta property="og:description" content="上一篇：ThreadLocal 解析 对象存在哪里ThreadLocal对象是被创建它的对象持有的，ThreadLocal存储的数据分别是各个线程实例持有的，它们都存在堆上。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-07-31T02:55:22.623Z">
+<meta property="og:updated_time" content="2019-06-29T12:27:02.822Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Doze">
-<meta name="twitter:description" content="Doze 模式Doze 模式的进入条件 屏幕关闭(必须) 未插电源 处于处于静止状态一段时间">
+<meta name="twitter:title" content="Java ThreadLocal细节记录">
+<meta name="twitter:description" content="上一篇：ThreadLocal 解析 对象存在哪里ThreadLocal对象是被创建它的对象持有的，ThreadLocal存储的数据分别是各个线程实例持有的，它们都存在堆上。">
 
 
 
 
 
 
-  <link rel="canonical" href="https://XF-zhjnc.github.io/2017/07/24/Android-Doze/"/>
+  <link rel="canonical" href="https://XF-zhjnc.github.io/2019/06/29/ThreadLocal-Problems/"/>
 
 
 
@@ -135,7 +135,7 @@
   };
 </script>
 
-  <title>Android Doze | XF-zhjnc.github.io</title>
+  <title>Java ThreadLocal细节记录 | XF-zhjnc.github.io</title>
   
 
 
@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://XF-zhjnc.github.io/2017/07/24/Android-Doze/">
+    <link itemprop="mainEntityOfPage" href="https://XF-zhjnc.github.io/2019/06/29/ThreadLocal-Problems/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MO Lulu">
@@ -313,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android Doze
+          <h1 class="post-title" itemprop="name headline">Java ThreadLocal细节记录
               
             
           </h1>
@@ -338,7 +338,7 @@
                 
               
 
-              <time title="Created: 2017-07-24 00:00:00" itemprop="dateCreated datePublished" datetime="2017-07-24T00:00:00+08:00">2017-07-24</time>
+              <time title="Created: 2019-06-29 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-29T00:00:00+08:00">2019-06-29</time>
             
 
             
@@ -372,30 +372,11 @@
       
 
       
-        <h3 id="Doze-模式"><a href="#Doze-模式" class="headerlink" title="Doze 模式"></a>Doze 模式</h3><h5 id="Doze-模式的进入条件"><a href="#Doze-模式的进入条件" class="headerlink" title="Doze 模式的进入条件"></a>Doze 模式的进入条件</h5><ul>
-<li>屏幕关闭(必须)</li>
-<li>未插电源</li>
-<li>处于处于静止状态一段时间</li>
-</ul>
+        <p>上一篇：<a href="https://xf-zhjnc.github.io/2018/10/14/ThreadLocal/">ThreadLocal 解析</a></p>
+<h3 id="对象存在哪里"><a href="#对象存在哪里" class="headerlink" title="对象存在哪里"></a>对象存在哪里</h3><p>ThreadLocal对象是被创建它的对象持有的，ThreadLocal存储的数据分别是各个线程实例持有的，它们都存在堆上。</p>
 <a id="more"></a>
-<h4 id="Doze-模式的设备行为"><a href="#Doze-模式的设备行为" class="headerlink" title="Doze 模式的设备行为"></a>Doze 模式的设备行为</h4><ul>
-<li>限制应用对网络和 CPU 密集型服务的访问来节省电量。系统会定期退出低电耗模式一会儿，好让应用完成其已推迟的 Activity。在此维护时段内，系统会运行所有待定同步、作业和闹铃并允许应用访问网络。</li>
-<li>应用程序受到的限制<ul>
-<li>网络访问被暂停</li>
-<li>不执行 WiFi 扫描</li>
-<li>忽略 wake locks</li>
-<li>AlarmManager 被推迟到下一次唤醒时<ul>
-<li>要设置在低电耗模式下触发的闹铃，使用 setAndAllowWhileIdle() 或 setExactAndAllowWhileIdle() 或者 setAlarmClock()</li>
-</ul>
-</li>
-<li>不允许运行同步适配器和 JobScheduler </li>
-<li>系统的下载服务、Google Play、GCM服务、白名单内的应用不会被限制</li>
-</ul>
-</li>
-</ul>
-<h4 id="退出-Doze-模式"><a href="#退出-Doze-模式" class="headerlink" title="退出 Doze 模式"></a>退出 Doze 模式</h4><ul>
-<li>点亮屏幕(需要 WAKE_LOCK 权限)</li>
-</ul>
+<h3 id="内存泄露问题"><a href="#内存泄露问题" class="headerlink" title="内存泄露问题"></a>内存泄露问题</h3><p>ThreadLocalMap在存储的时候，使用弱引用持有ThreadLocal，而使用强引用持有以ThreadLocal为key指向的value，当GC发生时，弱引用ThreadLocal被回收了，value失去了key无法再被remove()，可能会发生内存泄露。例如持有ThreadLocalMap的线程是线程池中的核心线程，会被复用，ThreadLocalMap没有重置，引用的value也就发生了泄露。解决方法：使用完ThreadLocal后调用其remove()方法及时置空。</p>
+<h3 id="为什么ThreadLocalMap里面用弱引用"><a href="#为什么ThreadLocalMap里面用弱引用" class="headerlink" title="为什么ThreadLocalMap里面用弱引用"></a>为什么ThreadLocalMap里面用弱引用</h3><p>如果key使用强引用，会发生跟value一样的内存泄露。</p>
 
       
     </div>
@@ -416,7 +397,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag"># Android</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -429,8 +410,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/18/Study-RxJava/" rel="next" title="Study RxJava">
-                <i class="fa fa-chevron-left"></i> Study RxJava
+              <a href="/2019/02/01/Build-Fuchsia/" rel="next" title="Fuchsia 编译笔记">
+                <i class="fa fa-chevron-left"></i> Fuchsia 编译笔记
               </a>
             
           </div>
@@ -438,10 +419,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/22/Download-Oracle-JDK/" rel="prev" title="wget 下载Oracle JDK">
-                wget 下载Oracle JDK <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -602,7 +579,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Doze-模式"><span class="nav-number">1.</span> <span class="nav-text">Doze 模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Doze-模式的进入条件"><span class="nav-number">1.0.1.</span> <span class="nav-text">Doze 模式的进入条件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Doze-模式的设备行为"><span class="nav-number">1.1.</span> <span class="nav-text">Doze 模式的设备行为</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#退出-Doze-模式"><span class="nav-number">1.2.</span> <span class="nav-text">退出 Doze 模式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象存在哪里"><span class="nav-number">1.</span> <span class="nav-text">对象存在哪里</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存泄露问题"><span class="nav-number">2.</span> <span class="nav-text">内存泄露问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么ThreadLocalMap里面用弱引用"><span class="nav-number">3.</span> <span class="nav-text">为什么ThreadLocalMap里面用弱引用</span></a></li></ol></div>
             
 
           </div>
