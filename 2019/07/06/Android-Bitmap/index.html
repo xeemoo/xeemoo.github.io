@@ -107,25 +107,25 @@
 
 
 
-  <meta name="description" content="Fork A Repo将开源项目复制到自己的仓库并pull到本地 Set upstream为了保证fork的项目能跟进上游项目的变更，必须设置上游项目的仓库地址1$ git remote add upstream https://github.com/User/project 设置好后检查本地关联的远程仓库：123456$ git remote -vorigin	https://github.co">
-<meta name="keywords" content="Git">
+  <meta name="description" content="背景很多手机相机输出的图片分辨率都远远超出了屏幕的像素密度，在应用中直接显示原图不仅会占用极大的内存空间，而且显示效果也并不理想。通常希望对图片进行重新采样压缩，并显示与界面展示大小相匹配的低分辨率图片。Android提供了BitmapFactory类，用于创建位图对象Bitmap，并可以通过Options配置如何解码原来的图片文件资源。一般的，在Android中创建Bitmap到内存，都应先使用">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pull Request">
-<meta property="og:url" content="https://XF-zhjnc.github.io/2016/12/09/Pull-Request/index.html">
+<meta property="og:title" content="Android Bitmap加载优化">
+<meta property="og:url" content="https://XF-zhjnc.github.io/2019/07/06/Android-Bitmap/index.html">
 <meta property="og:site_name" content="XF-zhjnc.github.io">
-<meta property="og:description" content="Fork A Repo将开源项目复制到自己的仓库并pull到本地 Set upstream为了保证fork的项目能跟进上游项目的变更，必须设置上游项目的仓库地址1$ git remote add upstream https://github.com/User/project 设置好后检查本地关联的远程仓库：123456$ git remote -vorigin	https://github.co">
+<meta property="og:description" content="背景很多手机相机输出的图片分辨率都远远超出了屏幕的像素密度，在应用中直接显示原图不仅会占用极大的内存空间，而且显示效果也并不理想。通常希望对图片进行重新采样压缩，并显示与界面展示大小相匹配的低分辨率图片。Android提供了BitmapFactory类，用于创建位图对象Bitmap，并可以通过Options配置如何解码原来的图片文件资源。一般的，在Android中创建Bitmap到内存，都应先使用">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-07-31T03:01:16.573Z">
+<meta property="og:updated_time" content="2019-07-06T07:10:34.882Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pull Request">
-<meta name="twitter:description" content="Fork A Repo将开源项目复制到自己的仓库并pull到本地 Set upstream为了保证fork的项目能跟进上游项目的变更，必须设置上游项目的仓库地址1$ git remote add upstream https://github.com/User/project 设置好后检查本地关联的远程仓库：123456$ git remote -vorigin	https://github.co">
+<meta name="twitter:title" content="Android Bitmap加载优化">
+<meta name="twitter:description" content="背景很多手机相机输出的图片分辨率都远远超出了屏幕的像素密度，在应用中直接显示原图不仅会占用极大的内存空间，而且显示效果也并不理想。通常希望对图片进行重新采样压缩，并显示与界面展示大小相匹配的低分辨率图片。Android提供了BitmapFactory类，用于创建位图对象Bitmap，并可以通过Options配置如何解码原来的图片文件资源。一般的，在Android中创建Bitmap到内存，都应先使用">
 
 
 
 
 
 
-  <link rel="canonical" href="https://XF-zhjnc.github.io/2016/12/09/Pull-Request/"/>
+  <link rel="canonical" href="https://XF-zhjnc.github.io/2019/07/06/Android-Bitmap/"/>
 
 
 
@@ -135,7 +135,7 @@
   };
 </script>
 
-  <title>Pull Request | XF-zhjnc.github.io</title>
+  <title>Android Bitmap加载优化 | XF-zhjnc.github.io</title>
   
 
 
@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://XF-zhjnc.github.io/2016/12/09/Pull-Request/">
+    <link itemprop="mainEntityOfPage" href="https://XF-zhjnc.github.io/2019/07/06/Android-Bitmap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MO Lulu">
@@ -313,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Pull Request
+          <h1 class="post-title" itemprop="name headline">Android Bitmap加载优化
               
             
           </h1>
@@ -338,7 +338,7 @@
                 
               
 
-              <time title="Created: 2016-12-09 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-09T00:00:00+08:00">2016-12-09</time>
+              <time title="Created: 2019-07-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-06T00:00:00+08:00">2019-07-06</time>
             
 
             
@@ -372,40 +372,13 @@
       
 
       
-        <h4 id="Fork-A-Repo"><a href="#Fork-A-Repo" class="headerlink" title="Fork A Repo"></a>Fork A Repo</h4><p>将开源项目复制到自己的仓库并pull到本地</p>
-<h4 id="Set-upstream"><a href="#Set-upstream" class="headerlink" title="Set upstream"></a>Set upstream</h4><p>为了保证fork的项目能跟进上游项目的变更，必须设置上游项目的仓库地址<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add upstream https://github.com/User/project</span><br></pre></td></tr></table></figure></p>
-<p>设置好后检查本地关联的远程仓库：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line"></span><br><span class="line">origin	https://github.com/XF-zhjnc/project.git (fetch)</span><br><span class="line">origin	https://github.com/XF-zhjnc/project.git (push)</span><br><span class="line">upstream	https://github.com/User/project (fetch)</span><br><span class="line">upstream	https://github.com/User/project (push)</span><br></pre></td></tr></table></figure></p>
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>很多手机相机输出的图片分辨率都远远超出了屏幕的像素密度，在应用中直接显示原图不仅会占用极大的内存空间，而且显示效果也并不理想。通常希望对图片进行重新采样压缩，并显示与界面展示大小相匹配的低分辨率图片。<br>Android提供了BitmapFactory类，用于创建位图对象Bitmap，并可以通过Options配置如何解码原来的图片文件资源。一般的，在Android中创建Bitmap到内存，都应先使用BitmapFactory从文件资源先读取图片的尺寸等信息，再按需要进行分配内存和解码。</p>
 <a id="more"></a>
-<p>其中：</p>
-<p>1.origin 是自己GitHub上fork出来的仓库<br>2.upstream 是上游项目的仓库</p>
-<h4 id="Sync-upstream"><a href="#Sync-upstream" class="headerlink" title="Sync upstream"></a>Sync upstream</h4><p>当上游项目有了更新，可以使用fetch指令将上游更新取回本地<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch upstream</span><br><span class="line">//也可以只取某个特定的分支的更新，具体参数加在后面</span><br></pre></td></tr></table></figure></p>
-<p>上游更新取回本地后，查看一下本地当前的所有分支情况<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -a</span><br></pre></td></tr></table></figure></p>
-<p>若想与上游项目某个分支代码合并，先切换到想合并的本地分支，再使用merge合并<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout 本地分支名	</span><br><span class="line">$ git merge upstream/分支名</span><br></pre></td></tr></table></figure></p>
-<p>另外本地的代码更新和分支更新应及时push到GitHub</p>
-<h4 id="Create-your-topic-branch"><a href="#Create-your-topic-branch" class="headerlink" title="Create your topic branch"></a>Create your topic branch</h4><p>一般情况下不应该直接在默认分支master上对项目进行修改，应该为每个工作创建一个单独的分支<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">e.g. 修复项目中的一个issue</span><br><span class="line"></span><br><span class="line">$ git checkout -b fix-Permission-err</span><br></pre></td></tr></table></figure></p>
-<p>push新分支信息到GitHub并开始在该分支下工作</p>
-<h4 id="Rebase-amp-Merge"><a href="#Rebase-amp-Merge" class="headerlink" title="Rebase &amp; Merge"></a>Rebase &amp; Merge</h4><ul>
-<li>如果在主题分支中工作的过程中，想要导入来自上游库(与当前的工作不冲突的情况下)的更新  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase upstream/master 本地主题分支名&lt;如果当前分支就是则可以省略&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>这将把当前branch的开发“base（基础）”推进到一个新的起点，而不会引入多余的commits。</strong></p>
-<ul>
-<li><p>如果在主题分支中工作的过程中，想要合并别的分支</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ get merge 另一个分支名</span><br></pre></td></tr></table></figure>
-<ul>
-<li>如果merge的分支来自远程库，一次merge操作会增加一个额外的commit操作（“Merge branch ‘master’ of something”）</li>
-<li>git merge还可以用来将其它主题分支引入的新功能合并到主线分支，以更新项目开发进度</li>
-</ul>
-</li>
-</ul>
-<h4 id="Pull-Request"><a href="#Pull-Request" class="headerlink" title="Pull Request"></a>Pull Request</h4><p>在GitHub上fork出来的仓库首页，New pull request，选择base branch以及head branch</p>
-<ol>
-<li>base branch：希望pull request被合并到上游项目的分支，也就是目标分支。</li>
-<li>head branch：想要提交的自己开发库中的主题分支。</li>
-</ol>
-<p>如果在某个分支里推送了一条pull request，那么在这条pull request被关闭之前，所有commit和push到该分支的代码都会追加到这个pull request后面</p>
-<h4 id="Delete-Branch"><a href="#Delete-Branch" class="headerlink" title="Delete Branch"></a>Delete Branch</h4><p>某个主题分支的使命完成后，删除掉该分支<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -d fix-Permission-err</span><br></pre></td></tr></table></figure></p>
-<hr>
+<h3 id="BitmapFactory-Options类"><a href="#BitmapFactory-Options类" class="headerlink" title="BitmapFactory.Options类"></a>BitmapFactory.Options类</h3><p>BitmapFactory在对资源解码创建Bitmap的时候，可以传入一个Options类，用于配置解码行为。Options类有许多<code>inXxx</code> 和 <code>outXxx</code>成员变量，分别用于解码前配置和获得解码后数据。<br>要在加载前读取Bitmap的尺寸类型等信息，可以将属性<code>inJustDecodeBounds</code>设置为true，这将不会为Bitmap对象分配内存，返回的也是Bitmap对象null，但是在解码后，Options对象的<code>outXxx</code>属性都会被赋值，可以读取这些属性以获得Bitmap的信息。在下一次调用BitmapFactory对资源解码时，可以根据前面获得的信息设置如<code>inSampleSize</code>等的合理参数，适应可用的内存。</p>
+<p>Options类的<code>inSampleSize</code>可以配置对位图进行下采样，在解码中它的实际值会为大于等于1且为2的整数幂（也就是设置的值会在代码中被调整修改），下采样后的Bitmap宽(高)度会等于原宽(高)度的 <code>1 / inSampleSize</code>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">BitmapFactory.Options options = <span class="keyword">new</span> BitmapFactory.Options();</span><br><span class="line"><span class="comment">// 设置为true, 先读取Bitmap的信息</span></span><br><span class="line">options.inJustDecodeBounds = <span class="keyword">true</span>;</span><br><span class="line">BitmapFactory.decodeFile(imageFilePath, options);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> needWidth = <span class="number">200</span>, needHeight = <span class="number">100</span>;</span><br><span class="line"><span class="comment">// 根据解码结果计算inSampleSize</span></span><br><span class="line">options.inSampleSize = Math.min(options.outWidth / needWidth, options.outHeight / needHeight);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置为false，再次解码</span></span><br><span class="line">options.inJustDecodeBounds = <span class="keyword">false</span>;</span><br><span class="line">Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath, options);</span><br></pre></td></tr></table></figure></p>
+<h3 id="列表图片缓存"><a href="#列表图片缓存" class="headerlink" title="列表图片缓存"></a>列表图片缓存</h3><p>考虑多图片的列表界面，每个可见item的图片需要同时加载，用户滑动时新的item又需要加载新的图片，item从屏幕外滑回来时，如果对加载过的图片重新加载一次，会影响页面性能。使用缓存可以改善多图片加载页面的性能。使用LruCache存储部分Bitmap到内存，可以实现快速访问。</p>
+<h3 id="Android系统对Bitmap的内存管理"><a href="#Android系统对Bitmap的内存管理" class="headerlink" title="Android系统对Bitmap的内存管理"></a>Android系统对Bitmap的内存管理</h3><p>从API 11 (Android 2.3.3)到API 25 (Android 7.1)，Bitmap以及它的像素数据是存储在堆内存中的，API 26 (Android 8.0)开始，像素数据迁移到了原生堆中，可以分配更大的内存。</p>
+<p>BitmapFactory.Options中的<code>inBitmap</code>属性，可以实现Bitmap的内存重用，避免内存的分配和取消分配，提高性能。</p>
 
       
     </div>
@@ -426,7 +399,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Git/" rel="tag"># Git</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
         </div>
       
@@ -439,8 +412,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/23/Banker's-Algorithm/" rel="next" title="Banker's Algorithm">
-                <i class="fa fa-chevron-left"></i> Banker's Algorithm
+              <a href="/2019/06/29/ThreadLocal-Problems/" rel="next" title="Java ThreadLocal细节记录">
+                <i class="fa fa-chevron-left"></i> Java ThreadLocal细节记录
               </a>
             
           </div>
@@ -448,10 +421,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/07/Android-Toolbar/" rel="prev" title="Android Toolbar">
-                Android Toolbar <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -612,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Fork-A-Repo"><span class="nav-number">1.</span> <span class="nav-text">Fork A Repo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set-upstream"><span class="nav-number">2.</span> <span class="nav-text">Set upstream</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sync-upstream"><span class="nav-number">3.</span> <span class="nav-text">Sync upstream</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-your-topic-branch"><span class="nav-number">4.</span> <span class="nav-text">Create your topic branch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rebase-amp-Merge"><span class="nav-number">5.</span> <span class="nav-text">Rebase &amp; Merge</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pull-Request"><span class="nav-number">6.</span> <span class="nav-text">Pull Request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Delete-Branch"><span class="nav-number">7.</span> <span class="nav-text">Delete Branch</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BitmapFactory-Options类"><span class="nav-number">2.</span> <span class="nav-text">BitmapFactory.Options类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表图片缓存"><span class="nav-number">3.</span> <span class="nav-text">列表图片缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android系统对Bitmap的内存管理"><span class="nav-number">4.</span> <span class="nav-text">Android系统对Bitmap的内存管理</span></a></li></ol></div>
             
 
           </div>
