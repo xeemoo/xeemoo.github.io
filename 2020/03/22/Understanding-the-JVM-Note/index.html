@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Java 内存模型，基本工作流程 Java的内存模型(JMM)指的是在并发环境下，JVM内存中的共享变量的访问规范。 JMM将共享变量所在内存分为主内存和工作内存，主内存为线程共享，工作内存为线程私有，线程需要操作共享变量时，从主内存拷贝到工作内存，修改后再写回主内存。 在内存之间的交互操作需要处理三个问题：原子性、可见性和有序性，Java内存模型在保证数据一致性上对以上三个特性建立了一系列的规则">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《深入理解Java虚拟机》笔记">
+<meta property="og:url" content="https://XF-zhjnc.github.io/2020/03/22/Understanding-the-JVM-Note/index.html">
+<meta property="og:site_name" content="XF-zhjnc.github.io">
+<meta property="og:description" content="Java 内存模型，基本工作流程 Java的内存模型(JMM)指的是在并发环境下，JVM内存中的共享变量的访问规范。 JMM将共享变量所在内存分为主内存和工作内存，主内存为线程共享，工作内存为线程私有，线程需要操作共享变量时，从主内存拷贝到工作内存，修改后再写回主内存。 在内存之间的交互操作需要处理三个问题：原子性、可见性和有序性，Java内存模型在保证数据一致性上对以上三个特性建立了一系列的规则">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-03-22T15:24:13.383Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《深入理解Java虚拟机》笔记">
+<meta name="twitter:description" content="Java 内存模型，基本工作流程 Java的内存模型(JMM)指的是在并发环境下，JVM内存中的共享变量的访问规范。 JMM将共享变量所在内存分为主内存和工作内存，主内存为线程共享，工作内存为线程私有，线程需要操作共享变量时，从主内存拷贝到工作内存，修改后再写回主内存。 在内存之间的交互操作需要处理三个问题：原子性、可见性和有序性，Java内存模型在保证数据一致性上对以上三个特性建立了一系列的规则">
+
+
+
+
+
+
+  <link rel="canonical" href="https://XF-zhjnc.github.io/2020/03/22/Understanding-the-JVM-Note/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>《深入理解Java虚拟机》笔记 | XF-zhjnc.github.io</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XF-zhjnc.github.io</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://XF-zhjnc.github.io/2020/03/22/Understanding-the-JVM-Note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MO Lulu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XF-zhjnc.github.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《深入理解Java虚拟机》笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-03-22 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-22T00:00:00+08:00">2020-03-22</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Java-内存模型，基本工作流程"><a href="#Java-内存模型，基本工作流程" class="headerlink" title="Java 内存模型，基本工作流程"></a>Java 内存模型，基本工作流程</h3><ul>
+<li><strong>Java的内存模型(JMM)指的是在并发环境下，JVM内存中的共享变量的访问规范。</strong></li>
+<li>JMM将共享变量所在内存分为主内存和工作内存，主内存为线程共享，工作内存为线程私有，线程需要操作共享变量时，从主内存拷贝到工作内存，修改后再写回主内存。</li>
+<li>在内存之间的交互操作需要处理三个问题：原子性、可见性和有序性，Java内存模型在保证数据一致性上对以上三个特性建立了一系列的规则。<br>Java使用内存屏障来实现可见性和有序性，内存屏障是被插入两个cpu指令之间的一种指令，用来禁止cpu指令发生重排序，从而保障<strong>有序性</strong>，另外为了达到屏障的效果，它也会使在cpu读写数据前先去主内存同步一次数据，从而保障<strong>可见性</strong>。<br>Java中的内存屏障指令主要在volatile和synchronized关键字修饰的代码块中存在，也可以使用Unsafe类实现。<a id="more"></a></li>
+<li>常见的四种内存屏障<ul>
+<li>LoadLoad屏障：对于语句<code>Load1; LoadLoad; Load2</code>，在Load2及后续读取操作要读取的数据被访问前，保证Load1要读取的数据被读取完毕。</li>
+<li>StoreStore屏障：对于语句<code>Store1; StoreStore; Store2</code>，在Store2及后续写操作执行前，保证Store1的写入对其他处理器可见。</li>
+<li>LoadStore屏障：对于语句<code>Load1; LoadStore; Store2</code>，在Store2及后续写入操作执行前，保证Load1要读取的数据被读取完毕。</li>
+<li>StoreLoad屏障：对于语句<code>Store1; StoreLoad; Load2</code>，在Load2及后续读取操作执行前，保证Store1的写入对其他处理器可见。这个屏障开销是最大的，在大多数的处理器实现中，它可以兼具其他三个屏障的功能。</li>
+</ul>
+</li>
+<li>该模型仅针对并发环境下，多线程之间共享变量的场景。<strong>JMM本质是一个缓存一致性协议，目的是为了在多核CPU环境下，在尽量利用硬件提高计算性能的同时，保证缓存的一致性。</strong></li>
+</ul>
+<h3 id="JVM运行时的内存区域划分"><a href="#JVM运行时的内存区域划分" class="headerlink" title="JVM运行时的内存区域划分"></a>JVM运行时的内存区域划分</h3><ul>
+<li>JVM的内存区域可分为两类：<strong>线程私有和线程共有的区域</strong>，线程私有的区域有<strong>程序计数器</strong>、<strong>虚拟机栈</strong>、<strong>本地方法栈</strong>，线程共有的区域有<strong>堆</strong>、<strong>方法区</strong>、<strong>常量池</strong>。</li>
+<li>每个线程都有一个私有的程序计数器，一个线程在任何时间都只有一个方法在执行，<strong>程序计数器存放的就是这个当前方法的JVM指令地址</strong>。</li>
+<li>虚拟机栈中存放一个个的栈帧，<strong>每个栈帧对应一个方法的调用</strong>，栈帧中存放局部变量表、方法返回值和方法的正常或异常退出的定义。</li>
+<li>本地方法栈与虚拟机栈类似，不过存放的是Native方法。</li>
+<li>堆用来存放对象实例，几乎所有创建的对象实例都会直接分配到堆上，堆是垃圾回收的主要区域，垃圾收集器可能会对堆进行更细致的划分，通常划分为新生代和老年代。</li>
+<li>方法区用于存放类的结构信息，例如静态属性静态方法。</li>
+<li>常量池位于方法区中，主要存放各种常量。</li>
+</ul>
+<h3 id="Java内存模型-与-JVM运行时的内存区域-的关系"><a href="#Java内存模型-与-JVM运行时的内存区域-的关系" class="headerlink" title="Java内存模型 与 JVM运行时的内存区域 的关系"></a>Java内存模型 与 JVM运行时的内存区域 的关系</h3><ul>
+<li>没有关系。</li>
+<li>JMM的主内存区域主要对应堆中的对象实例部分，JMM工作内存对应虚拟机栈中的部分区域。</li>
+</ul>
+<h3 id="类加载机制，ClassLoader加载Class的过程"><a href="#类加载机制，ClassLoader加载Class的过程" class="headerlink" title="类加载机制，ClassLoader加载Class的过程"></a>类加载机制，ClassLoader加载Class的过程</h3><ul>
+<li><p>类加载机制的概念</p>
+<p>  JVM的类加载器将Java代码编译后的.class文件读取到内存中，存放在运行时内存区域的方法区，然后进行数据校验、转换解析和初始化，在堆区创建一个java.lang.Class对象用于访问这个类的数据结构。</p>
+</li>
+<li><p>类加载的时机</p>
+<p>  一个类型从被加载到卸载的生命周期主要经历了以下的步骤：<strong>加载 -&gt; 验证 -&gt; 准备 -&gt; 解析 -&gt; 初始化 -&gt; 使用 -&gt; 卸载</strong></p>
+<p>  虚拟机规范中对<code>初始化</code>阶段的触发时机有严格的规定，而之前的阶段并没有特别的要求，仅需要保证是在<code>初始化</code>阶段前。虚拟机规范规定了<strong>有且仅有六种情况</strong>下必须要立即对类型进行<code>初始化</code>。</p>
+<ol>
+<li><p>遇到new、getstatic、putstatic、invokestatic四条字节码指令时。产生这四条字节码指令的场景：</p>
+<ul>
+<li>使用new关键字实例化对象</li>
+<li>读取或设置一个类型的static字段(被final修饰的除外)</li>
+<li>调用一个类型的静态方法</li>
+</ul>
+</li>
+<li><p>使用java.lang.reflect包的方法对类型进行反射调用时，若类型没有进行过初始化，则需要先触发初始化</p>
+</li>
+<li>当初始化类时发现其父类没有初始化，则需要先触发父类的初始化</li>
+<li>虚拟机启动时，包含main()方法的那个类会先被初始化</li>
+<li>使用JDK7新加入的动态语言支持时，若java.lang.invoke.MethodHandle实例最后的解析结果为REF_getStatic、REF_putStatic、REF_invokeStatic、REF_newInstanceSpecial四种类型的方法句柄，且方法句柄对应的类没有初始化，则需要先触发初始化</li>
+<li><p>当一个接口中定义了JDK8新增的接口默认方法时，如果有这个接口的实现类发生了初始化，则要先触发接口的初始化</p>
+<p>以上六种情况称为<code>对一个类型进行主动引用</code>，除此之外的称为<code>被动引用</code>，不会触发类型的初始化。</p>
+<p>被动引用的例子：</p>
+</li>
+<li><p>通过子类去引用父类中定义的static字段，仅会初始化父类，而不会触发子类初始化。至于是否触发子类的加载&amp;验证等阶段，JVM规范没有规定，取决于具体的虚拟机实现。</p>
+</li>
+<li><p>定义某个类型的数组，不会触发该类型初始化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    cn.xeemon.Cat[] catArray = <span class="keyword">new</span> cn.xeemon.Cat[<span class="number">10</span>];</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    不会触发 cn.xeemon.Cat 类的初始化</span></span><br><span class="line"><span class="comment">    但是这里会触发 [Lcn.xeemon.Cat 类的初始化，这是JVM自动生成的类</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>引用类中定义的静态常量不会触发类的初始化。实际上常量在编译阶段会存入调用类的常量池中，本质上是没有使用到定义常量的类，也就不会触发定义常量的类的初始化。</p>
+<p>对于接口，主动引用的第三种情况仅适用于类，即一个接口在初始化时，不会要求其父接口要完成初始化，只有真正使用到父接口时才会初始化。</p>
+</li>
+</ol>
+</li>
+<li><p>类加载的过程</p>
+<ul>
+<li><p>加载</p>
+<p>  JVM规范中对加载的实现要求：</p>
+<blockquote>
+<ol>
+<li>通过类的全限定名称来获取定义此类的二进制数据</li>
+<li>将二进制字节流所描述的存储结构转化为方法区中的运行时数据结构</li>
+<li>在堆中实例化一个代表这个类的java.lang.Class对象，作为方法区的这个类的数据结构的访问入口</li>
+</ol>
+</blockquote>
+</li>
+<li><p>验证</p>
+<p>  这一阶段主要是确保class文件的字节流包含的信息是符合《Java虚拟机规范》的，包含<code>文件格式校验</code>、<code>元数据校验</code>、<code>字节码校验</code>、<code>符号引用校验</code>等四个步骤。</p>
+<p>  <code>文件格式校验</code>是检查输入的字节流能否正确地解析并存储在方法区，格式是否能描述一个Java类型信息。</p>
+<p>  <code>元数据校验</code>是对类型的元数据进行语义分析，例如是否有父类，是否继承了不可继承的类，非抽象类是否都实现了父类抽象方法等。</p>
+<p>  <code>字节码校验</code>是对类型的方法体及进行语义检查，保证方法在运行时不会做出危害虚拟机安全的行为。</p>
+<p>  <code>符号引用校验</code>是确保符号引用能转化为直接引用，也就是检查类是否缺少或者被禁止访问它依赖的外部类或方法或字段等。</p>
+</li>
+<li><p>准备</p>
+<p>  在这一阶段为类中定义的static变量在方法区中分配内存空间，并设置为它数据类型的初始零值，若是static final常量则直接设置代码指定的初始值。</p>
+</li>
+<li><p>解析</p>
+<p>  在这一阶段JVM将常量池内的符号引用替换为直接引用。</p>
+</li>
+<li><p>初始化</p>
+<p> 执行类中编写的Java代码，对变量进行初始化</p>
+</li>
+</ul>
+</li>
+<li><p>类与类加载器的关系</p>
+<p>  对于任意一个类，都必须由加载它的类加载器和这个类本身来确定在JVM中的唯一性，每个类加载器都有一个独立的命名空间。也就是说，对于同一虚拟机环境下，使用不同的类加载器加载同一个class，得到的两个类也是必定不相等的。</p>
+</li>
+<li><p>双亲委派模型</p>
+</li>
+</ul>
+<p>一般的，Java的类加载器分为三种，分别为<code>启动类加载器 Bootstrap ClassLoader</code>、<code>扩展类加载器 Extension ClassLoader</code>、<code>应用程序加载器 Application ClassLoader</code>，除了Bootstrap ClassLoader，其他类加载器都有一个父类加载器。某个类加载器在收到加载类请求时，都会先委托父类加载器去加载这个类，并依此逐级向上传递，如果父类加载不了，才由当前的类加载器去加载这个类。</p>
+<p>双亲委派模型避免了类重复加载的问题，并避免了某些恶意的类加载，程序无法修改和替代Java基础包中的类。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/06/Android-Bitmap/" rel="next" title="Android Bitmap加载优化">
+                <i class="fa fa-chevron-left"></i> Android Bitmap加载优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="MO Lulu" />
+            
+              <p class="site-author-name" itemprop="name">MO Lulu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/XF-zhjnc" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhjncxf@outlook.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-内存模型，基本工作流程"><span class="nav-number">1.</span> <span class="nav-text">Java 内存模型，基本工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM运行时的内存区域划分"><span class="nav-number">2.</span> <span class="nav-text">JVM运行时的内存区域划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java内存模型-与-JVM运行时的内存区域-的关系"><span class="nav-number">3.</span> <span class="nav-text">Java内存模型 与 JVM运行时的内存区域 的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载机制，ClassLoader加载Class的过程"><span class="nav-number">4.</span> <span class="nav-text">类加载机制，ClassLoader加载Class的过程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-address-card-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MO Lulu</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
